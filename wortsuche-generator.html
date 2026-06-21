@@ -5,8 +5,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Wortsuche-Generator – eigene Wortsuche erstellen | MyPuzzleOnline</title>
 <meta name="description" content="Wortsuche erstellen kostenlos: eigene Wörter eingeben, Gittergröße wählen, generieren und ausdrucken. Ohne Anmeldung.">
+<link rel="canonical" href="https://mypuzzleonline.com/wortsuche-generator.html">
+
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MyPuzzleOnline">
+<meta property="og:title" content="Wortsuche-Generator – eigene Wortsuche erstellen | MyPuzzleOnline">
+<meta property="og:description" content="Wortsuche erstellen kostenlos: eigene Wörter eingeben, Gittergröße wählen, generieren und ausdrucken. Ohne Anmeldung.">
+<meta property="og:url" content="https://mypuzzleonline.com/wortsuche-generator.html">
+<meta property="og:image" content="https://mypuzzleonline.com/og-image.png">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wortsuche-Generator – eigene Wortsuche erstellen | MyPuzzleOnline">
+<meta name="twitter:description" content="Wortsuche erstellen kostenlos: eigene Wörter eingeben, Gittergröße wählen, generieren und ausdrucken. Ohne Anmeldung.">
+<meta name="twitter:image" content="https://mypuzzleonline.com/og-image.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"MyPuzzleOnline","url":"https://mypuzzleonline.com/","logo":"https://mypuzzleonline.com/icon-512.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"MyPuzzleOnline","url":"https://mypuzzleonline.com/","inLanguage":"de"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "name": "Wortsuche-Generator", "description": "Wortsuche erstellen kostenlos: eigene W\u00f6rter eingeben, Gittergr\u00f6\u00dfe w\u00e4hlen, generieren und ausdrucken. Ohne Anmeldung.", "url": "https://mypuzzleonline.com/wortsuche-generator.html", "genre": "Puzzle", "applicationCategory": "GameApplication", "operatingSystem": "Web", "inLanguage": "de", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "MyPuzzleOnline"}}</script>
 <script>(function(){try{var t=localStorage.getItem('mpo_theme');t=t?JSON.parse(t):((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -390,19 +408,37 @@ MPO.recordWin=function(game,opts){
   return xp;
 };
 
-/* ---------- chrome ---------- */
-var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily']];
+/* ---------- chrome (i18n) ---------- */
+MPO.lang='de';MPO.slug='index.html';
+function T(){
+  if(MPO.lang==='en')return {games:'Games',daily:'Daily',theme:'Light/Dark',
+    ck:'We use cookies for advertising (Google AdSense). Game progress is stored locally only. ',more:'Learn more',
+    ckOk:'Accept all',ckNo:'Only necessary',
+    foot:[['spiele.html','Games'],['daily.html','Daily'],['../wissen.html','Knowledge'],['../faq.html','FAQ'],['../hilfe.html','Help'],['../ueber-uns.html','About'],['../kontakt.html','Contact'],['../impressum.html','Imprint'],['../datenschutz.html','Privacy']],
+    tag:'\u00A9 2025 mypuzzleonline.com \u00B7 No account needed \u00B7 Play for free',priv:'../datenschutz.html',sw:'DE'};
+  return {games:'Spiele',daily:'Daily',theme:'Hell/Dunkel',
+    ck:'Wir nutzen Cookies f\u00FCr Werbung (Google AdSense). Spielfortschritte werden nur lokal gespeichert. ',more:'Mehr erfahren',
+    ckOk:'Alle akzeptieren',ckNo:'Nur notwendige',
+    foot:[['spiele.html','Spiele'],['daily.html','Daily'],['wissen.html','Wissen'],['faq.html','FAQ'],['hilfe.html','Hilfe'],['ueber-uns.html','\u00DCber uns'],['kontakt.html','Kontakt'],['impressum.html','Impressum'],['datenschutz.html','Datenschutz']],
+    tag:'\u00A9 2025 mypuzzleonline.com \u00B7 Kein Konto n\u00F6tig \u00B7 Kostenlos spielen',priv:'datenschutz.html',sw:'EN'};
+}
 function header(active){
-  var nav=NAVLINKS.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
+  var t=T();
+  var links=[['spiele.html',t.games,'games'],['daily.html',t.daily,'daily']];
+  var nav=links.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
+  var other=(MPO.lang==='en')?('../'+MPO.slug):('en/'+MPO.slug);
+  var sw='<a class="iconbtn" id="langBtn" title="'+t.sw+'" href="'+other+'" style="text-decoration:none;font-weight:700;font-size:.76rem;display:inline-flex;align-items:center;justify-content:center">'+t.sw+'</a>';
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
-   '</nav><div class="htools"><button class="iconbtn" id="themeBtn" title="Hell/Dunkel" onclick="MPO.toggleTheme()">🌙</button></div></header>';
+   '</nav><div class="htools">'+sw+'<button class="iconbtn" id="themeBtn" title="'+t.theme+'" onclick="MPO.toggleTheme()">🌙</button></div></header>';
 }
 function footer(){
+  var t=T();
+  var fl=t.foot.map(function(l){return '<a href="'+l[0]+'">'+l[1]+'</a>';}).join(' · ');
   return '<div id="toast-wrap"></div>'+
-   '<div id="ck"><p>Wir nutzen Cookies für Werbung (Google AdSense). Spielfortschritte werden nur lokal gespeichert. <a href="datenschutz.html">Mehr erfahren</a></p>'+
-   '<div class="ck-btns"><button id="ck-ok" onclick="MPO._ck(\'all\')">Alle akzeptieren</button><button id="ck-no" onclick="MPO._ck(\'necessary\')">Nur notwendige</button></div></div>'+
-   '<footer class="site"><div><a href="spiele.html">Spiele</a> · <a href="daily.html">Daily</a> · <a href="wissen.html">Wissen</a> · <a href="faq.html">FAQ</a> · <a href="hilfe.html">Hilfe</a> · <a href="ueber-uns.html">Über uns</a> · <a href="kontakt.html">Kontakt</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>'+
-   '<div style="margin-top:3px">© 2025 mypuzzleonline.com · Kein Konto nötig · Kostenlos spielen</div></footer>';
+   '<div id="ck"><p>'+t.ck+'<a href="'+t.priv+'">'+t.more+'</a></p>'+
+   '<div class="ck-btns"><button id="ck-ok" onclick="MPO._ck(\'all\')">'+t.ckOk+'</button><button id="ck-no" onclick="MPO._ck(\'necessary\')">'+t.ckNo+'</button></div></div>'+
+   '<footer class="site"><div>'+fl+'</div>'+
+   '<div style="margin-top:3px">'+t.tag+'</div></footer>';
 }
 MPO._ck=function(v){store.s('cookie_consent',v);var c=document.getElementById('ck');if(c)c.style.display='none';};
 MPO.activeNav='';
@@ -418,7 +454,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='games';
+<script>MPO.activeNav='games';MPO.lang='de';MPO.slug='wortsuche-generator.html';
 var SIZE=12,DIRS=[[0,1],[1,0],[1,1],[1,-1],[0,-1],[-1,0],[-1,-1],[-1,1]];
 function rint(n){return Math.floor(Math.random()*n);}
 function gen(words){var grid=Array.from({length:SIZE},function(){return Array(SIZE).fill('');}),placed=[],miss=[];words.slice().sort(function(a,b){return b.length-a.length;}).forEach(function(w){var ok=false;for(var a=0;a<300&&!ok;a++){var d=DIRS[rint(8)],r=rint(SIZE),c=rint(SIZE),er=r+d[0]*(w.length-1),ec=c+d[1]*(w.length-1);if(er<0||er>=SIZE||ec<0||ec>=SIZE)continue;var fits=true,cells=[];for(var i=0;i<w.length;i++){var rr=r+d[0]*i,cc=c+d[1]*i;if(grid[rr][cc]!==''&&grid[rr][cc]!==w[i]){fits=false;break;}cells.push([rr,cc]);}if(!fits)continue;cells.forEach(function(p,i){grid[p[0]][p[1]]=w[i];});placed.push(w);ok=true;}if(!ok)miss.push(w);});var A='ABCDEFGHIJKLMNOPQRSTUVWXYZ';for(var r=0;r<SIZE;r++)for(var c=0;c<SIZE;c++)if(grid[r][c]==='')grid[r][c]=A[rint(26)];return {grid:grid,placed:placed,miss:miss};}

@@ -5,8 +5,26 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zauberwürfel (Rubik&#x27;s Cube): Geschichte &amp; Zahlen | MyPuzzleOnline</title>
 <meta name="description" content="Der Zauberwürfel wurde 1974 vom Ungarn Ernő Rubik erfunden und eroberte ab 1980 die Welt. Die Geschichte, die Mechanik und die 43 Trillionen Stellungen.">
+<link rel="canonical" href="https://mypuzzleonline.com/wissen-rubiks-cube.html">
+
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MyPuzzleOnline">
+<meta property="og:title" content="Zauberwürfel (Rubik&#x27;s Cube): Geschichte &amp; Zahlen | MyPuzzleOnline">
+<meta property="og:description" content="Der Zauberwürfel wurde 1974 vom Ungarn Ernő Rubik erfunden und eroberte ab 1980 die Welt. Die Geschichte, die Mechanik und die 43 Trillionen Stellungen.">
+<meta property="og:url" content="https://mypuzzleonline.com/wissen-rubiks-cube.html">
+<meta property="og:image" content="https://mypuzzleonline.com/og-image.png">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Zauberwürfel (Rubik&#x27;s Cube): Geschichte &amp; Zahlen | MyPuzzleOnline">
+<meta name="twitter:description" content="Der Zauberwürfel wurde 1974 vom Ungarn Ernő Rubik erfunden und eroberte ab 1980 die Welt. Die Geschichte, die Mechanik und die 43 Trillionen Stellungen.">
+<meta name="twitter:image" content="https://mypuzzleonline.com/og-image.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"MyPuzzleOnline","url":"https://mypuzzleonline.com/","logo":"https://mypuzzleonline.com/icon-512.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"MyPuzzleOnline","url":"https://mypuzzleonline.com/","inLanguage":"de"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Zauberw\u00fcrfel (Rubik's Cube): Geschichte & Zahlen", "description": "Der Zauberw\u00fcrfel wurde 1974 vom Ungarn Ern\u0151 Rubik erfunden und eroberte ab 1980 die Welt. Die Geschichte, die Mechanik und die 43 Trillionen Stellungen.", "inLanguage": "de", "mainEntityOfPage": "https://mypuzzleonline.com/wissen-rubiks-cube.html", "author": {"@type": "Organization", "name": "MyPuzzleOnline"}, "publisher": {"@type": "Organization", "name": "MyPuzzleOnline", "logo": {"@type": "ImageObject", "url": "https://mypuzzleonline.com/icon-512.png"}}}</script>
 <script>(function(){try{var t=localStorage.getItem('mpo_theme');t=t?JSON.parse(t):((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -371,19 +389,37 @@ MPO.recordWin=function(game,opts){
   return xp;
 };
 
-/* ---------- chrome ---------- */
-var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily']];
+/* ---------- chrome (i18n) ---------- */
+MPO.lang='de';MPO.slug='index.html';
+function T(){
+  if(MPO.lang==='en')return {games:'Games',daily:'Daily',theme:'Light/Dark',
+    ck:'We use cookies for advertising (Google AdSense). Game progress is stored locally only. ',more:'Learn more',
+    ckOk:'Accept all',ckNo:'Only necessary',
+    foot:[['spiele.html','Games'],['daily.html','Daily'],['../wissen.html','Knowledge'],['../faq.html','FAQ'],['../hilfe.html','Help'],['../ueber-uns.html','About'],['../kontakt.html','Contact'],['../impressum.html','Imprint'],['../datenschutz.html','Privacy']],
+    tag:'\u00A9 2025 mypuzzleonline.com \u00B7 No account needed \u00B7 Play for free',priv:'../datenschutz.html',sw:'DE'};
+  return {games:'Spiele',daily:'Daily',theme:'Hell/Dunkel',
+    ck:'Wir nutzen Cookies f\u00FCr Werbung (Google AdSense). Spielfortschritte werden nur lokal gespeichert. ',more:'Mehr erfahren',
+    ckOk:'Alle akzeptieren',ckNo:'Nur notwendige',
+    foot:[['spiele.html','Spiele'],['daily.html','Daily'],['wissen.html','Wissen'],['faq.html','FAQ'],['hilfe.html','Hilfe'],['ueber-uns.html','\u00DCber uns'],['kontakt.html','Kontakt'],['impressum.html','Impressum'],['datenschutz.html','Datenschutz']],
+    tag:'\u00A9 2025 mypuzzleonline.com \u00B7 Kein Konto n\u00F6tig \u00B7 Kostenlos spielen',priv:'datenschutz.html',sw:'EN'};
+}
 function header(active){
-  var nav=NAVLINKS.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
+  var t=T();
+  var links=[['spiele.html',t.games,'games'],['daily.html',t.daily,'daily']];
+  var nav=links.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
+  var other=(MPO.lang==='en')?('../'+MPO.slug):('en/'+MPO.slug);
+  var sw='<a class="iconbtn" id="langBtn" title="'+t.sw+'" href="'+other+'" style="text-decoration:none;font-weight:700;font-size:.76rem;display:inline-flex;align-items:center;justify-content:center">'+t.sw+'</a>';
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
-   '</nav><div class="htools"><button class="iconbtn" id="themeBtn" title="Hell/Dunkel" onclick="MPO.toggleTheme()">🌙</button></div></header>';
+   '</nav><div class="htools">'+sw+'<button class="iconbtn" id="themeBtn" title="'+t.theme+'" onclick="MPO.toggleTheme()">🌙</button></div></header>';
 }
 function footer(){
+  var t=T();
+  var fl=t.foot.map(function(l){return '<a href="'+l[0]+'">'+l[1]+'</a>';}).join(' · ');
   return '<div id="toast-wrap"></div>'+
-   '<div id="ck"><p>Wir nutzen Cookies für Werbung (Google AdSense). Spielfortschritte werden nur lokal gespeichert. <a href="datenschutz.html">Mehr erfahren</a></p>'+
-   '<div class="ck-btns"><button id="ck-ok" onclick="MPO._ck(\'all\')">Alle akzeptieren</button><button id="ck-no" onclick="MPO._ck(\'necessary\')">Nur notwendige</button></div></div>'+
-   '<footer class="site"><div><a href="spiele.html">Spiele</a> · <a href="daily.html">Daily</a> · <a href="wissen.html">Wissen</a> · <a href="faq.html">FAQ</a> · <a href="hilfe.html">Hilfe</a> · <a href="ueber-uns.html">Über uns</a> · <a href="kontakt.html">Kontakt</a> · <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a></div>'+
-   '<div style="margin-top:3px">© 2025 mypuzzleonline.com · Kein Konto nötig · Kostenlos spielen</div></footer>';
+   '<div id="ck"><p>'+t.ck+'<a href="'+t.priv+'">'+t.more+'</a></p>'+
+   '<div class="ck-btns"><button id="ck-ok" onclick="MPO._ck(\'all\')">'+t.ckOk+'</button><button id="ck-no" onclick="MPO._ck(\'necessary\')">'+t.ckNo+'</button></div></div>'+
+   '<footer class="site"><div>'+fl+'</div>'+
+   '<div style="margin-top:3px">'+t.tag+'</div></footer>';
 }
 MPO._ck=function(v){store.s('cookie_consent',v);var c=document.getElementById('ck');if(c)c.style.display='none';};
 MPO.activeNav='';
@@ -399,6 +435,6 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='';</script>
+<script>MPO.activeNav='';MPO.lang='de';MPO.slug='wissen-rubiks-cube.html';</script>
 </body>
 </html>
