@@ -220,7 +220,7 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
   <div class="card"><h2>✏️ Kreuzworträtsel</h2><ol><li>Feld antippen – das Wort wird markiert, der Hinweis aktiv.</li><li>Erneut tippen wechselt zwischen waagerecht und senkrecht.</li><li><strong>Prüfen</strong> färbt richtig/falsch, <strong>Lösung</strong> füllt alles.</li></ol></div>
   <div class="card"><h2>🔍 Wortsuche</h2><ol><li>Thema wählen.</li><li>Mit Maus oder Finger über die Buchstaben eines Wortes ziehen.</li><li>Wörter verstecken sich in 8 Richtungen – auch rückwärts.</li></ol></div>
   <div class="card"><h2>🃏 Memory &amp; weitere Spiele</h2><p><strong>Memory:</strong> zwei gleiche Karten finden. <strong>Hangman:</strong> Buchstaben raten, 6 Fehlversuche. <strong>Anagramme/Scramble:</strong> Buchstaben zum Wort ordnen. <strong>Mathe-Rätsel:</strong> 60 Sekunden Kopfrechnen.</p></div>
-  <div class="card"><h2>📅 Daily, Erfolge &amp; PWA</h2><ul><li><strong>Daily:</strong> 5 Rätsel pro Tag auf der <a href="daily.html">Daily-Seite</a> – hält deine Serie am Leben.</li><li><strong>Erfolge:</strong> automatisch beim Spielen; Übersicht unter <a href="achievements.html">Erfolge</a>.</li><li><strong>Installieren:</strong> im Browsermenü „Zum Startbildschirm hinzufügen".</li><li><strong>Hell/Dunkel:</strong> 🌙/☀️ oben rechts.</li></ul></div>
+  <div class="card"><h2>📅 Daily &amp; PWA</h2><ul><li><strong>Daily:</strong> Jeden Tag fünf neue Rätsel auf der <a href="daily.html">Daily-Seite</a>.</li><li><strong>Installieren:</strong> im Browsermenü „Zum Startbildschirm hinzufügen".</li><li><strong>Hell/Dunkel:</strong> 🌙/☀️ oben rechts umschalten.</li></ul></div>
 </main>
 
 <script>
@@ -335,11 +335,7 @@ function snapshot(){
     dailyDays:store.g('daily_days',0),todayCount:store.g('today_count',0),achCount:unlocked.length,
     speedCount:store.g('speed_count',0)};
 }
-MPO.evaluate=function(){
-  var s=snapshot(),unlocked=store.g('achievements',[]),changed=false;
-  ACH.forEach(function(a){if(unlocked.indexOf(a.id)<0){try{if(a.f(s)){unlocked.push(a.id);changed=true;toast(a.ico,'Erfolg freigeschaltet!',a.t);MPO.sound.unlock();confetti();}}catch(e){}}});
-  if(changed)store.s('achievements',unlocked);
-};
+MPO.evaluate=function(){};
 
 /* ---------- toast + confetti ---------- */
 function toast(ico,title,desc){var w=document.getElementById('toast-wrap');if(!w)return;
@@ -381,7 +377,7 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome ---------- */
-var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily'],['training.html','Training','training'],['achievements.html','Bestenliste','ach']];
+var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily']];
 function header(active){
   var nav=NAVLINKS.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+

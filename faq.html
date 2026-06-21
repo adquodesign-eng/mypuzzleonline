@@ -227,7 +227,7 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
     <details><summary>Wie bekomme ich XP und Level?</summary><p>Jedes gelöste Rätsel gibt XP – mehr bei höherer Schwierigkeit, fehlerfreiem Spiel und Tempo. Mit genug XP steigst du durch 10 Level vom Anfänger bis zur Legende.</p></details>
     <h2>Technik &amp; Datenschutz</h2>
     <details><summary>Werden meine Daten gespeichert?</summary><p>Nur lokal in deinem Browser (localStorage). Es gibt keinen Account und keinen Server für Spieldaten. Details in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p></details>
-    <details><summary>Wie lösche ich meine gespeicherten Daten?</summary><p>Auf der <a href="achievements.html">Erfolge-Seite</a> findest du unten die Buttons „Exportieren" und „Alle Daten löschen" (mit Sicherheitsabfrage).</p></details>
+    <details><summary>Wie lösche ich meine gespeicherten Daten?</summary><p>Unten auf der <a href="datenschutz.html">Datenschutz-Seite</a> findest du die Buttons „Daten exportieren" und „Alle Daten löschen" (mit Sicherheitsabfrage).</p></details>
     <details><summary>Kann ich MyPuzzleOnline als App installieren?</summary><p>Ja. Es ist eine PWA – im Browsermenü „Zum Startbildschirm hinzufügen" bzw. „Installieren" wählen.</p></details>
     <details><summary>Funktioniert die Seite offline?</summary><p>Nach dem ersten Besuch werden die Seiten zwischengespeichert, sodass die meisten Spiele auch offline laufen.</p></details>
     <h2>Tägliche Challenges</h2>
@@ -348,11 +348,7 @@ function snapshot(){
     dailyDays:store.g('daily_days',0),todayCount:store.g('today_count',0),achCount:unlocked.length,
     speedCount:store.g('speed_count',0)};
 }
-MPO.evaluate=function(){
-  var s=snapshot(),unlocked=store.g('achievements',[]),changed=false;
-  ACH.forEach(function(a){if(unlocked.indexOf(a.id)<0){try{if(a.f(s)){unlocked.push(a.id);changed=true;toast(a.ico,'Erfolg freigeschaltet!',a.t);MPO.sound.unlock();confetti();}}catch(e){}}});
-  if(changed)store.s('achievements',unlocked);
-};
+MPO.evaluate=function(){};
 
 /* ---------- toast + confetti ---------- */
 function toast(ico,title,desc){var w=document.getElementById('toast-wrap');if(!w)return;
@@ -394,7 +390,7 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome ---------- */
-var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily'],['training.html','Training','training'],['achievements.html','Bestenliste','ach']];
+var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily']];
 function header(active){
   var nav=NAVLINKS.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+

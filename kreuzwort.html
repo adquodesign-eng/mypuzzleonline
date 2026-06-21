@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Kreuzworträtsel online lösen – kostenlos | MyPuzzleOnline</title>
-<meta name="description" content="Kreuzworträtsel kostenlos online: mit Hinweisen waagerecht und senkrecht, aktiver Markierung und Lösungsprüfung.">
+<title>Kreuzworträtsel online lösen – Leicht bis Schwer | MyPuzzleOnline</title>
+<meta name="description" content="Kreuzworträtsel kostenlos online in drei Schwierigkeitsstufen – mit Hinweisen, aktiver Markierung und Lösungsprüfung.">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
 <script>(function(){try{var t=localStorage.getItem('mpo_theme');t=t?JSON.parse(t):((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -217,11 +217,16 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
 <main class="narrow">
   <div class="page-head"><h1>✏️ Kreuzworträtsel</h1><p class="sub">Tippe ein Feld an und schreibe die Buchstaben. Erneutes Tippen wechselt zwischen waagerecht und senkrecht.</p></div>
   <div class="gamewrap">
+    <div class="vbtns" style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center">
+      <button class="btn sm primary" data-cwdiff="leicht">Leicht</button>
+      <button class="btn sm" data-cwdiff="mittel">Mittel</button>
+      <button class="btn sm" data-cwdiff="schwer">Schwer</button>
+    </div>
     <div class="cwg" id="grid"></div>
     <div class="toolbar">
       <button class="btn sm" id="check">✓ Prüfen</button>
       <button class="btn sm" id="reveal">💡 Lösung</button>
-      <button class="btn sm primary" id="restart">↺ Neu</button>
+      <button class="btn sm primary" id="bnew">＋ Neues Rätsel</button>
     </div>
     <div class="cwclues"><div><h3 style="font-size:.85rem">Waagerecht</h3><ol id="ca"></ol></div><div><h3 style="font-size:.85rem">Senkrecht</h3><ol id="cd"></ol></div></div>
   </div>
@@ -340,11 +345,7 @@ function snapshot(){
     dailyDays:store.g('daily_days',0),todayCount:store.g('today_count',0),achCount:unlocked.length,
     speedCount:store.g('speed_count',0)};
 }
-MPO.evaluate=function(){
-  var s=snapshot(),unlocked=store.g('achievements',[]),changed=false;
-  ACH.forEach(function(a){if(unlocked.indexOf(a.id)<0){try{if(a.f(s)){unlocked.push(a.id);changed=true;toast(a.ico,'Erfolg freigeschaltet!',a.t);MPO.sound.unlock();confetti();}}catch(e){}}});
-  if(changed)store.s('achievements',unlocked);
-};
+MPO.evaluate=function(){};
 
 /* ---------- toast + confetti ---------- */
 function toast(ico,title,desc){var w=document.getElementById('toast-wrap');if(!w)return;
@@ -386,7 +387,7 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome ---------- */
-var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily'],['training.html','Training','training'],['achievements.html','Bestenliste','ach']];
+var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily']];
 function header(active){
   var nav=NAVLINKS.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
@@ -413,9 +414,13 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='games';
-var PUZZLES=[{grid:[["S","O","N","N","E"],["E","#","E","#","I"],["G","A","B","E","L"],["E","#","E","#","E"],["L","#","L","#","N"]],
-  clues:{A:{1:"Stern, um den sich die Erde dreht",4:"Besteck mit Zinken"},D:{1:"Fängt am Boot den Wind ein",2:"Dichter Dunst am Morgen",3:"Sich sehr beeilen"}}}];
+<script>MPO.activeNav='games';var PUZZLES=[{diff:"leicht",grid:[["#","#","R","#","#","#","#","#","#","#"],["#","#","O","#","H","#","#","#","K","#"],["#","#","S","#","O","#","#","R","A","D"],["S","T","E","R","N","#","#","#","T","#"],["#","#","#","#","I","#","#","#","Z","#"],["#","#","#","#","G","A","R","T","E","N"]],clues:{A:{"4":"Dreht sich am Fahrzeug","5":"Leuchtpunkt am Nachthimmel","6":"Grün hinterm Haus"},D:{"1":"Blume mit Dornen","2":"Süß von Bienen","3":"Schnurrt gern"}}},
+{diff:"leicht",grid:[["#","#","K","#","#","#","#","#","#","#","#"],["#","T","U","R","M","#","#","#","#","#","#"],["#","#","C","#","#","#","#","#","#","#","#"],["#","#","H","#","S","#","#","#","#","#","I"],["#","#","E","#","E","#","#","#","#","#","N"],["H","O","N","I","G","#","#","#","#","#","S"],["#","#","#","#","E","#","#","#","#","#","E"],["#","#","#","#","L","O","E","F","F","E","L"]],clues:{A:{"2":"Hohes schmales Bauwerk","5":"Süß von Bienen","6":"Besteck für Suppe"},D:{"1":"Süßes Gebäck","3":"Fängt am Boot den Wind","4":"Land im Meer"}}},
+{diff:"mittel",grid:[["#","#","R","#","#","#","#","#","#","#"],["#","#","O","#","H","#","#","#","K","#"],["E","#","S","#","O","#","#","R","A","D"],["S","T","E","R","N","#","#","#","T","#"],["E","#","#","#","I","#","B","#","Z","#"],["L","#","#","#","G","A","R","T","E","N"],["#","#","#","#","#","#","O","#","#","O"],["#","#","#","#","#","#","T","#","#","T"],["#","#","#","#","#","#","#","#","#","E"]],clues:{A:{"5":"Dreht sich am Fahrzeug","6":"Leuchtpunkt am Nachthimmel","8":"Grün hinterm Haus"},D:{"1":"Blume mit Dornen","2":"Süß von Bienen","3":"Schnurrt gern","4":"Graues Lasttier mit langen Ohren","7":"Bäcker backt es","9":"Zeichen in der Musik"}}},
+{diff:"mittel",grid:[["#","#","#","#","#","H","#","#","#","#","#"],["#","#","#","#","#","A","#","#","#","#","#"],["#","#","#","M","A","U","S","#","#","#","#"],["#","T","#","A","#","S","#","#","#","#","#"],["#","O","#","L","#","#","#","#","#","#","#"],["B","R","U","E","C","K","E","#","#","#","#"],["#","#","#","N","#","#","S","#","#","#","#"],["#","#","#","#","#","#","E","#","#","#","#"],["#","#","#","#","#","#","L","E","S","E","N"],["#","#","#","#","#","#","#","#","E","#","#"],["#","#","#","#","#","#","Z","U","G","#","#"],["#","#","#","#","#","#","#","#","E","#","#"],["#","#","#","#","#","#","#","#","L","#","#"]],clues:{A:{"2":"Kleiner Nager","4":"Führt über einen Fluss","6":"Ein Buch …","8":"Fährt auf Schienen"},D:{"1":"Man wohnt darin","2":"Mit Pinsel und Farbe","3":"Großes Eingangstor","5":"Graues Lasttier mit langen Ohren","7":"Fängt am Boot den Wind"}}},
+{diff:"schwer",grid:[["#","#","#","#","#","H","#","#","#","#","#","#","#"],["#","#","#","#","#","A","#","#","#","#","#","#","#"],["#","#","#","M","A","U","S","#","#","#","#","#","#"],["#","T","#","A","#","S","#","#","#","#","G","#","#"],["#","O","#","L","#","#","#","#","#","#","A","#","#"],["B","R","U","E","C","K","E","#","B","E","R","G","#"],["A","#","#","N","#","#","S","#","#","#","T","#","#"],["U","#","#","#","#","#","E","#","#","#","E","#","#"],["M","#","#","#","#","#","L","E","S","E","N","#","#"],["#","#","#","#","#","#","#","#","E","#","#","#","#"],["#","#","#","#","#","#","Z","U","G","#","#","#","#"],["#","#","#","#","#","#","#","#","E","I","L","E","N"],["#","#","#","#","#","#","#","#","L","#","#","#","#"]],clues:{A:{"2":"Kleiner Nager","5":"Führt über einen Fluss","7":"Hohe Erhebung","8":"Ein Buch …","10":"Fährt auf Schienen","11":"Sich sehr beeilen"},D:{"1":"Man wohnt darin","2":"Mit Pinsel und Farbe","3":"Großes Eingangstor","4":"Grün hinterm Haus","5":"Hat Stamm und Krone","6":"Graues Lasttier mit langen Ohren","9":"Fängt am Boot den Wind"}}},
+{diff:"schwer",grid:[["#","#","#","#","#","#","#","#","#","#","#","Z"],["#","#","#","#","#","#","#","#","#","I","#","A"],["#","#","#","#","#","#","#","#","#","N","#","U"],["#","#","#","W","#","#","#","L","E","S","E","N"],["H","O","N","I","G","#","#","O","#","E","#","#"],["#","#","#","N","#","#","#","E","I","L","E","N"],["#","M","#","T","#","A","#","F","#","#","S","#"],["#","A","B","E","N","D","#","F","#","#","E","#"],["#","U","#","R","#","L","I","E","D","#","L","#"],["#","S","#","#","#","E","#","L","#","#","#","#"],["#","#","#","T","O","R","#","#","#","#","#","#"]],clues:{A:{"4":"Ein Buch …","5":"Süß von Bienen","6":"Sich sehr beeilen","10":"Tageszeit nach dem Nachmittag","11":"Wird gesungen","12":"Großes Eingangstor"},D:{"1":"Begrenzt ein Grundstück","2":"Land im Meer","3":"Kälteste Jahreszeit","4":"Besteck für Suppe","7":"Graues Lasttier mit langen Ohren","8":"Kleiner Nager","9":"Großer Greifvogel"}}}];
+var curDiff='leicht';
 var P,grid,R,C,gridEl=document.getElementById('grid'),dir='A',cur=null,numAt={},entries={A:{},D:{}};
 function isB(r,c){return grid[r][c]==='#';}
 function load(p){P=p;grid=p.grid;R=grid.length;C=grid[0].length;numAt={};entries={A:{},D:{}};var num=0;
@@ -430,11 +435,13 @@ function adv(){var cells=ecells(),i=cells.findIndex(function(p){return p[0]==cur
 function bk(){var cells=ecells(),i=cells.findIndex(function(p){return p[0]==cur[0]&&p[1]==cur[1];});if(i>0){cur=cells[i-1];var inp=inputAt(cur[0],cur[1]);inp.focus();inp.value='';}}
 function clues(){function li(o,d){return Object.keys(o).map(function(n){return '<li data-d="'+d+'" data-n="'+n+'"><b>'+n+'.</b> '+o[n]+'</li>';}).join('');}document.getElementById('ca').innerHTML=li(P.clues.A,'A');document.getElementById('cd').innerHTML=li(P.clues.D,'D');document.querySelectorAll('.cwclues li').forEach(function(el){el.onclick=function(){dir=el.dataset.d;var cells=entries[dir][el.dataset.n];if(cells){cur=cells[0];inputAt(cur[0],cur[1]).focus();}};});}
 function active(){document.querySelectorAll('.cwclues li').forEach(function(el){el.classList.remove('active');});var cells=ecells();if(!cells.length)return;var f=cells[0],n=numAt[f[0]+'-'+f[1]];var el=document.querySelector('.cwclues li[data-d="'+dir+'"][data-n="'+n+'"]');if(el)el.classList.add('active');}
-function checkWin(){for(var r=0;r<R;r++)for(var c=0;c<C;c++){if(isB(r,c))continue;var inp=inputAt(r,c);if(!inp.value||inp.value!==grid[r][c])return;}var xp=MPO.recordWin('crossword',{xp:150});MPO.sound.ok();MPO.confetti();document.getElementById('wx').textContent='+'+xp+' XP';document.getElementById('win').classList.add('show');}
+function checkWin(){for(var r=0;r<R;r++)for(var c=0;c<C;c++){if(isB(r,c))continue;var inp=inputAt(r,c);if(!inp.value||inp.value!==grid[r][c])return;}var xp=MPO.recordWin('crossword',{xp:150,difficulty:curDiff});MPO.sound.ok();MPO.confetti();document.getElementById('wx').textContent=({leicht:'Leicht',mittel:'Mittel',schwer:'Schwer'}[curDiff])+' · +'+xp+' XP';document.getElementById('win').classList.add('show');}
 document.getElementById('check').onclick=function(){var wrong=0;for(var r=0;r<R;r++)for(var c=0;c<C;c++){if(isB(r,c))continue;var inp=inputAt(r,c);if(inp.value){if(inp.value===grid[r][c])inp.style.color='var(--success)';else{inp.style.color='var(--danger)';wrong++;}}}MPO.toast(wrong===0?'✅':'❌',wrong===0?'Alles korrekt':wrong+' falsch','');setTimeout(function(){gridEl.querySelectorAll('input').forEach(function(i){i.style.color='';});},1500);};
 document.getElementById('reveal').onclick=function(){for(var r=0;r<R;r++)for(var c=0;c<C;c++){if(isB(r,c))continue;inputAt(r,c).value=grid[r][c];}checkWin();};
-document.getElementById('restart').onclick=function(){gridEl.querySelectorAll('input').forEach(function(i){i.value='';});};
-window.initPage=function(){load(PUZZLES[0]);};
+function pick(d){curDiff=d;var list=PUZZLES.filter(function(p){return p.diff===d;});var p=list[Math.floor(Math.random()*list.length)];load(p);document.querySelectorAll('[data-cwdiff]').forEach(function(b){b.classList.toggle('primary',b.dataset.cwdiff===d);});}
+document.querySelectorAll('[data-cwdiff]').forEach(function(b){b.onclick=function(){pick(b.dataset.cwdiff);};});
+document.getElementById('bnew').onclick=function(){pick(curDiff);};
+window.initPage=function(){pick('leicht');};
 </script>
 </body>
 </html>

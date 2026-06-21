@@ -223,15 +223,6 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
     <div class="statbar"><div class="s"><b>14</b> Spiele</div><div class="s"><b>Täglich</b> neue Challenges</div><div class="s"><b>100%</b> kostenlos</div><div class="s"><b>Kein</b> Konto nötig</div></div>
   </section>
 
-  <div class="card">
-    <div class="kpi" style="justify-content:center">
-      <div class="k"><div class="n" id="kStreak">0</div><div class="l">🔥 Streak</div></div>
-      <div class="k"><div class="n" id="kBest">0</div><div class="l">🏅 Beste Serie</div></div>
-      <div class="k"><div class="n" id="kSolved">0</div><div class="l">✅ Gelöst</div></div>
-      <div class="k"><div class="n" id="kAch">0</div><div class="l">🏆 Erfolge</div></div>
-    </div>
-    <p id="streakHint" style="margin:12px 0 0;font-size:.85rem;color:var(--secondary);font-weight:600;text-align:center"></p>
-  </div>
 
   <h2 style="font-family:'Sora',sans-serif;font-size:1.25rem;margin:8px 0 14px">🎮 Alle Spiele</h2>
   <div class="grid c4"><a class="tile" href="sudoku.html"><span class="diff badge gray">Leicht–Experte</span><span class="ico">🔢</span><h3>Sudoku</h3><p>Zahlen-Logik in 4 Stufen</p></a>
@@ -258,12 +249,6 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
     <a class="btn primary" href="daily.html">Zur Daily Challenge →</a>
   </div>
 
-  <h2 style="font-family:'Sora',sans-serif;font-size:1.25rem;margin:22px 0 14px">🧠 Gehirntraining</h2>
-  <div class="grid c3">
-    <a class="tile" href="training.html"><span class="ico">💾</span><h3>Gedächtnis</h3><p>Memory &amp; Konzentration trainieren.</p></a>
-    <a class="tile" href="training.html"><span class="ico">🔢</span><h3>Logik</h3><p>Sudoku, Zahlenfolgen, Muster.</p></a>
-    <a class="tile" href="training.html"><span class="ico">📖</span><h3>Wortschatz</h3><p>Anagramme, Wortsuche, Hangman.</p></a>
-  </div>
 </main>
 
 <script>
@@ -378,11 +363,7 @@ function snapshot(){
     dailyDays:store.g('daily_days',0),todayCount:store.g('today_count',0),achCount:unlocked.length,
     speedCount:store.g('speed_count',0)};
 }
-MPO.evaluate=function(){
-  var s=snapshot(),unlocked=store.g('achievements',[]),changed=false;
-  ACH.forEach(function(a){if(unlocked.indexOf(a.id)<0){try{if(a.f(s)){unlocked.push(a.id);changed=true;toast(a.ico,'Erfolg freigeschaltet!',a.t);MPO.sound.unlock();confetti();}}catch(e){}}});
-  if(changed)store.s('achievements',unlocked);
-};
+MPO.evaluate=function(){};
 
 /* ---------- toast + confetti ---------- */
 function toast(ico,title,desc){var w=document.getElementById('toast-wrap');if(!w)return;
@@ -424,7 +405,7 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome ---------- */
-var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily'],['training.html','Training','training'],['achievements.html','Bestenliste','ach']];
+var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily']];
 function header(active){
   var nav=NAVLINKS.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
@@ -453,13 +434,6 @@ document.addEventListener('DOMContentLoaded',function(){
 </script>
 <script>MPO.activeNav='';
 function initPage(){
-  var s=MPO.store;
-  document.getElementById('kStreak').textContent=s.g('streak',0);
-  document.getElementById('kBest').textContent=s.g('best_streak',0);
-  document.getElementById('kSolved').textContent=s.g('total_solved',0);
-  document.getElementById('kAch').textContent=s.g('achievements',[]).length+'/'+MPO.ACHIEVEMENTS.length;
-  var last=s.raw('last_play',null),today=MPO.getDailyDate();
-  document.getElementById('streakHint').textContent=last===today?'✅ Heute schon gespielt – stark!':'Heute noch nicht gespielt – starte deine Serie!';
   function cd(){var n=new Date(),e=new Date(n);e.setHours(24,0,0,0);var d=Math.floor((e-n)/1000);var h=String(Math.floor(d/3600)).padStart(2,'0'),m=String(Math.floor(d%3600/60)).padStart(2,'0'),sx=String(d%60).padStart(2,'0');var el=document.getElementById('cd');if(el)el.textContent=h+':'+m+':'+sx;}
   cd();setInterval(cd,1000);
 }

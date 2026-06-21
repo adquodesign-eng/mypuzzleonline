@@ -222,10 +222,6 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
     <div id="todayDate" style="font-size:.8rem;color:var(--muted)"></div>
   </div>
   <div class="grid c2" id="challenges"></div>
-  <div class="card">
-    <h2>Deine letzten 7 Tage</h2>
-    <div id="cal" style="display:flex;gap:8px;flex-wrap:wrap"></div>
-  </div>
   <div style="text-align:center"><button class="btn amber" id="share">🔗 Ergebnis teilen</button></div>
 </main>
 
@@ -341,11 +337,7 @@ function snapshot(){
     dailyDays:store.g('daily_days',0),todayCount:store.g('today_count',0),achCount:unlocked.length,
     speedCount:store.g('speed_count',0)};
 }
-MPO.evaluate=function(){
-  var s=snapshot(),unlocked=store.g('achievements',[]),changed=false;
-  ACH.forEach(function(a){if(unlocked.indexOf(a.id)<0){try{if(a.f(s)){unlocked.push(a.id);changed=true;toast(a.ico,'Erfolg freigeschaltet!',a.t);MPO.sound.unlock();confetti();}}catch(e){}}});
-  if(changed)store.s('achievements',unlocked);
-};
+MPO.evaluate=function(){};
 
 /* ---------- toast + confetti ---------- */
 function toast(ico,title,desc){var w=document.getElementById('toast-wrap');if(!w)return;
@@ -387,7 +379,7 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome ---------- */
-var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily'],['training.html','Training','training'],['achievements.html','Bestenliste','ach']];
+var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily']];
 function header(active){
   var nav=NAVLINKS.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
@@ -421,10 +413,6 @@ function initPage(){
   var today=MPO.getDailyDate();document.getElementById('todayDate').textContent='Heute: '+today.substr(6,2)+'.'+today.substr(4,2)+'.'+today.substr(0,4);
   var done=doneToday();
   document.getElementById('challenges').innerHTML=CH.map(function(c,i){var ok=done[c[3]];return '<a class="tile" href="'+c[2]+'"><span class="diff badge '+(ok?'green':'gray')+'">'+(ok?'✅ erledigt':'offen')+'</span><span class="ico">'+c[0]+'</span><h3>'+c[1]+'</h3><p>Challenge '+(i+1)+' von 5</p></a>';}).join('');
-  // calendar last 7 days
-  var hist=MPO.store.g('daily_hist',{});var html='';
-  for(var d=6;d>=0;d--){var ds=MPO.dateOffset(-d);var c=hist[ds];var lbl=ds.substr(6,2)+'.'+ds.substr(4,2);html+='<div style="text-align:center"><div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;background:'+(c?'rgba(16,185,129,.15)':'var(--bg)')+';border:1px solid var(--border)">'+(c?'✅':'·')+'</div><div style="font-size:.62rem;color:var(--muted);margin-top:3px">'+lbl+'</div></div>';}
-  document.getElementById('cal').innerHTML=html;
   function cd(){var n=new Date(),e=new Date(n);e.setHours(24,0,0,0);var s=Math.floor((e-n)/1000);document.getElementById('cd').textContent=String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
   cd();setInterval(cd,1000);
   var n=Object.keys(done).length;

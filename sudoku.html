@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sudoku online spielen – kostenlos | MyPuzzleOnline</title>
-<meta name="description" content="Sudoku kostenlos online spielen in 4 Schwierigkeitsgraden – mit Notizen, Hinweisen, Fehlerzähler, Timer und XP.">
+<title>Sudoku online spielen – klassisch, X, Hyper, 6×6 | MyPuzzleOnline</title>
+<meta name="description" content="Sudoku kostenlos online in 4 Varianten (Klassisch, Diagonal/X, Hyper/Windoku, 6×6) und 4 Schwierigkeitsgraden – mit Notizen, Hinweisen, Fehlerzähler und Timer.">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
 <script>(function(){try{var t=localStorage.getItem('mpo_theme');t=t?JSON.parse(t):((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -214,17 +214,39 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
 </head>
 <body>
 
+<style>
+.sgrid{display:grid;border:3px solid var(--text);border-radius:8px;overflow:hidden;background:var(--surface);width:min(92vw,468px);aspect-ratio:1;margin:0 auto}
+.sgrid .c{display:flex;align-items:center;justify-content:center;cursor:pointer;font-family:'Sora',sans-serif;font-weight:700;border:1px solid var(--border);user-select:none;color:var(--primary);position:relative;font-size:clamp(1rem,4.4vw,1.5rem)}
+.sgrid .c.given{color:var(--text);background:var(--bg)}
+.sgrid .c.diag{background:rgba(99,102,241,.08)}
+.sgrid .c.hyper{background:rgba(245,158,11,.12)}
+.sgrid .c.peer{background:var(--primary-soft)}
+.sgrid .c.sel{box-shadow:inset 0 0 0 2px var(--primary);background:var(--primary-soft)!important}
+.sgrid .c.same{background:rgba(245,158,11,.28)!important}
+.sgrid .c.err{color:var(--danger)!important;background:rgba(239,68,68,.16)!important}
+.sgrid .br{border-right:2px solid var(--muted)}
+.sgrid .bb{border-bottom:2px solid var(--muted)}
+.sgrid .nt{display:grid;grid-template-columns:repeat(3,1fr);width:100%;height:100%;font-size:.46rem;color:var(--muted);font-weight:600}
+.sgrid .nt span{display:flex;align-items:center;justify-content:center}
+.vbtns{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+</style>
 <main class="narrow">
-  <div class="page-head"><h1>🔢 Sudoku</h1><p class="sub" id="mode">Fülle das Gitter so, dass jede Zeile, Spalte und jeder 3×3-Block die Ziffern 1–9 enthält.</p></div>
+  <div class="page-head"><h1>🔢 Sudoku</h1><p class="sub" id="rule">Fülle das Gitter so, dass jede Zeile, Spalte und jeder Block die Ziffern enthält.</p></div>
   <div class="gamewrap">
-    <div class="toolbar">
+    <div class="vbtns">
+      <button class="btn sm primary" data-var="classic">Klassisch</button>
+      <button class="btn sm" data-var="diagonal">Diagonal (X)</button>
+      <button class="btn sm" data-var="hyper">Hyper</button>
+      <button class="btn sm" data-var="mini">6×6 Mini</button>
+    </div>
+    <div class="vbtns">
       <button class="btn sm" data-diff="easy">Leicht</button>
-      <button class="btn sm" data-diff="medium">Mittel</button>
+      <button class="btn sm primary" data-diff="medium">Mittel</button>
       <button class="btn sm" data-diff="hard">Schwer</button>
       <button class="btn sm" data-diff="expert">Experte</button>
     </div>
     <div class="toolbar"><span class="timer" id="timer">00:00</span><span class="pill" id="errs">Fehler: 0/3</span><span class="pill" id="prog">0%</span></div>
-    <div class="sudoku" id="board"></div>
+    <div class="sgrid" id="board"></div>
     <div class="numpad" id="numpad"></div>
     <div class="toolbar">
       <button class="btn sm" id="bn">📝 Notizen: aus</button>
@@ -348,11 +370,7 @@ function snapshot(){
     dailyDays:store.g('daily_days',0),todayCount:store.g('today_count',0),achCount:unlocked.length,
     speedCount:store.g('speed_count',0)};
 }
-MPO.evaluate=function(){
-  var s=snapshot(),unlocked=store.g('achievements',[]),changed=false;
-  ACH.forEach(function(a){if(unlocked.indexOf(a.id)<0){try{if(a.f(s)){unlocked.push(a.id);changed=true;toast(a.ico,'Erfolg freigeschaltet!',a.t);MPO.sound.unlock();confetti();}}catch(e){}}});
-  if(changed)store.s('achievements',unlocked);
-};
+MPO.evaluate=function(){};
 
 /* ---------- toast + confetti ---------- */
 function toast(ico,title,desc){var w=document.getElementById('toast-wrap');if(!w)return;
@@ -394,7 +412,7 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome ---------- */
-var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily'],['training.html','Training','training'],['achievements.html','Bestenliste','ach']];
+var NAVLINKS=[['spiele.html','Spiele','games'],['daily.html','Daily','daily']];
 function header(active){
   var nav=NAVLINKS.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
@@ -422,33 +440,61 @@ document.addEventListener('DOMContentLoaded',function(){
 })();
 </script>
 <script>MPO.activeNav='games';
-var HOLES={easy:40,medium:46,hard:52,expert:57},XP={easy:50,medium:100,hard:200,expert:400};
+var VAR={
+ classic:{N:9,BH:3,BW:3,diag:false,hyper:false,label:'Klassisch',rule:'Jede Zeile, Spalte und jeder 3×3-Block enthält 1–9 genau einmal.'},
+ diagonal:{N:9,BH:3,BW:3,diag:true,hyper:false,label:'Diagonal (X)',rule:'Wie klassisch – zusätzlich enthalten beide Diagonalen 1–9.'},
+ hyper:{N:9,BH:3,BW:3,diag:false,hyper:true,label:'Hyper (Windoku)',rule:'Wie klassisch – zusätzlich enthalten die vier farbigen 3×3-Felder 1–9.'},
+ mini:{N:6,BH:2,BW:3,diag:false,hyper:false,label:'6×6 Mini',rule:'Jede Zeile, Spalte und jeder 2×3-Block enthält 1–6 genau einmal.'}
+};
+var HOLES={9:{easy:40,medium:46,hard:52,expert:57},6:{easy:11,medium:15,hard:19,expert:22}};
+var XPV={easy:50,medium:100,hard:200,expert:400};
+var N=9,BH=3,BW=3,DIAG=false,HYPER=false;
 var board=document.getElementById('board'),numpad=document.getElementById('numpad');
-var puzzle,solution,given,notes,sel=-1,nm=false,sec=0,tid=null,daily=false,diff='easy',solved=false,errors=0;
-function idx(r,c){return r*9+c;}
-function canPlace(b,r,c,n){for(var i=0;i<9;i++)if(b[idx(r,i)]===n||b[idx(i,c)]===n)return false;var br=Math.floor(r/3)*3,bc=Math.floor(c/3)*3;for(var i2=0;i2<3;i2++)for(var j=0;j<3;j++)if(b[idx(br+i2,bc+j)]===n)return false;return true;}
+var puzzle,solution,given,notes,sel=-1,nm=false,sec=0,tid=null,diff='medium',variant='classic',solved=false,errors=0;
+function inHyper(r,c){return ((r>=1&&r<=3)||(r>=5&&r<=7))&&((c>=1&&c<=3)||(c>=5&&c<=7));}
+function hReg(r,c){return (r<=3?0:1)*2+(c<=3?0:1);}
+function canPlace(b,r,c,n){
+  var i,j;
+  for(i=0;i<N;i++){if(b[r*N+i]===n||b[i*N+c]===n)return false;}
+  var br=Math.floor(r/BH)*BH,bc=Math.floor(c/BW)*BW;
+  for(i=0;i<BH;i++)for(j=0;j<BW;j++)if(b[(br+i)*N+(bc+j)]===n)return false;
+  if(DIAG){
+    if(r===c){for(i=0;i<N;i++)if(b[i*N+i]===n)return false;}
+    if(r+c===N-1){for(i=0;i<N;i++)if(b[i*N+(N-1-i)]===n)return false;}
+  }
+  if(HYPER&&inHyper(r,c)){var reg=hReg(r,c);for(i=0;i<N;i++)for(j=0;j<N;j++)if(inHyper(i,j)&&hReg(i,j)===reg&&b[i*N+j]===n)return false;}
+  return true;
+}
 function shuffle(a,rng){for(var i=a.length-1;i>0;i--){var j=Math.floor((rng?rng():Math.random())*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}return a;}
-function fill(b,rng){for(var p=0;p<81;p++){if(b[p]===0){var r=Math.floor(p/9),c=p%9,nums=shuffle([1,2,3,4,5,6,7,8,9],rng);for(var k=0;k<9;k++){var n=nums[k];if(canPlace(b,r,c,n)){b[p]=n;if(fill(b,rng))return true;b[p]=0;}}return false;}}return true;}
-function countSol(b,lim){for(var p=0;p<81;p++){if(b[p]===0){var r=Math.floor(p/9),c=p%9,cnt=0;for(var n=1;n<=9;n++){if(canPlace(b,r,c,n)){b[p]=n;cnt+=countSol(b,lim-cnt);b[p]=0;if(cnt>=lim)break;}}return cnt;}}return 1;}
-function gen(holes,rng){var b=new Array(81).fill(0);fill(b,rng);var sol=b.slice();var cells=shuffle(Array.from({length:81},function(_,i){return i;}),rng),rem=0;for(var i=0;i<cells.length&&rem<holes;i++){var p=cells[i];if(b[p]===0)continue;var bak=b[p];b[p]=0;if(countSol(b.slice(),2)!==1)b[p]=bak;else rem++;}return {puzzle:b,solution:sol};}
-function buildNumpad(){var h='';for(var n=1;n<=9;n++)h+='<button data-n="'+n+'">'+n+'</button>';h+='<button data-n="0">⌫</button>';numpad.innerHTML=h;numpad.querySelectorAll('button').forEach(function(b){b.onclick=function(){place(parseInt(b.dataset.n,10));};});}
-function render(){var h='';for(var r=0;r<9;r++)for(var c=0;c<9;c++){var p=idx(r,c),cls='c'+(((r+1)%3===0&&r!==8)?' r3':'')+(given[p]?' given':'');h+='<div class="'+cls+'" data-p="'+p+'" tabindex="0"></div>';}board.innerHTML=h;board.querySelectorAll('.c').forEach(function(cell){cell.onclick=function(){sel=parseInt(cell.dataset.p,10);paint();};});paint();}
-function paint(){var sv=sel>=0?puzzle[sel]:0,filled=0;board.querySelectorAll('.c').forEach(function(cell){var p=parseInt(cell.dataset.p,10),v=puzzle[p],r=Math.floor(p/9),c=p%9;cell.className='c'+(((r+1)%3===0&&r!==8)?' r3':'')+(given[p]?' given':'');if(p===sel)cell.classList.add('sel');else if(sel>=0){var sr=Math.floor(sel/9),sc=sel%9;if(r===sr||c===sc||(Math.floor(r/3)===Math.floor(sr/3)&&Math.floor(c/3)===Math.floor(sc/3)))cell.classList.add('peer');}if(v&&sv&&v===sv&&p!==sel)cell.classList.add('same');if(v){cell.textContent=v;filled++;}else if(notes[p]&&notes[p].size){var ns='<div class="nt">';for(var n=1;n<=9;n++)ns+='<span>'+(notes[p].has(n)?n:'')+'</span>';ns+='</div>';cell.innerHTML=ns;}else cell.textContent='';});document.getElementById('prog').textContent=Math.round(filled/81*100)+'%';}
-function place(n){if(sel<0||given[sel]||solved)return;if(n===0){puzzle[sel]=0;if(notes[sel])notes[sel].clear();paint();return;}if(nm){if(puzzle[sel])return;if(!notes[sel])notes[sel]=new Set();notes[sel].has(n)?notes[sel].delete(n):notes[sel].add(n);paint();return;}puzzle[sel]=n;if(notes[sel])notes[sel].clear();if(n!==solution[sel]){errors++;document.getElementById('errs').textContent='Fehler: '+errors+'/3';MPO.sound.err();var cel=board.querySelector('[data-p="'+sel+'"]');paint();cel.classList.add('err');if(errors>=3){gameOver();}return;}MPO.sound.click();paint();checkWin();}
+function nums(){var a=[];for(var i=1;i<=N;i++)a.push(i);return a;}
+function fill(b,rng){for(var p=0;p<N*N;p++){if(b[p]===0){var r=Math.floor(p/N),c=p%N,ns=shuffle(nums(),rng);for(var k=0;k<ns.length;k++){var n=ns[k];if(canPlace(b,r,c,n)){b[p]=n;if(fill(b,rng))return true;b[p]=0;}}return false;}}return true;}
+function countSol(b,lim){for(var p=0;p<N*N;p++){if(b[p]===0){var r=Math.floor(p/N),c=p%N,cnt=0;for(var n=1;n<=N;n++){if(canPlace(b,r,c,n)){b[p]=n;cnt+=countSol(b,lim-cnt);b[p]=0;if(cnt>=lim)break;}}return cnt;}}return 1;}
+function gen(holes,rng){var b=new Array(N*N).fill(0);fill(b,rng);var sol=b.slice();var cells=shuffle(Array.from({length:N*N},function(_,i){return i;}),rng),rem=0;for(var i=0;i<cells.length&&rem<holes;i++){var p=cells[i];if(b[p]===0)continue;var bak=b[p];b[p]=0;if(countSol(b.slice(),2)!==1)b[p]=bak;else rem++;}return {puzzle:b,solution:sol};}
+function buildNumpad(){var h='';for(var n=1;n<=N;n++)h+='<button data-n="'+n+'">'+n+'</button>';h+='<button data-n="0">⌫</button>';numpad.style.gridTemplateColumns='repeat('+(N===6?4:5)+',1fr)';numpad.innerHTML=h;numpad.querySelectorAll('button').forEach(function(b){b.onclick=function(){place(parseInt(b.dataset.n,10));};});}
+function cellClasses(r,c){var cl='c';if((c+1)%BW===0&&c<N-1)cl+=' br';if((r+1)%BH===0&&r<N-1)cl+=' bb';if(DIAG&&(r===c||r+c===N-1))cl+=' diag';if(HYPER&&inHyper(r,c))cl+=' hyper';return cl;}
+function render(){board.style.gridTemplateColumns='repeat('+N+',1fr)';var h='';for(var r=0;r<N;r++)for(var c=0;c<N;c++){var p=r*N+c;h+='<div class="'+cellClasses(r,c)+(given[p]?' given':'')+'" data-p="'+p+'" tabindex="0"></div>';}board.innerHTML=h;board.querySelectorAll('.c').forEach(function(cell){cell.onclick=function(){sel=parseInt(cell.dataset.p,10);paint();};});paint();}
+function paint(){var sv=sel>=0?puzzle[sel]:0,filled=0;board.querySelectorAll('.c').forEach(function(cell){var p=parseInt(cell.dataset.p,10),v=puzzle[p],r=Math.floor(p/N),c=p%N;cell.className=cellClasses(r,c)+(given[p]?' given':'');if(p===sel)cell.classList.add('sel');else if(sel>=0){var sr=Math.floor(sel/N),sc=sel%N;if(r===sr||c===sc||(Math.floor(r/BH)===Math.floor(sr/BH)&&Math.floor(c/BW)===Math.floor(sc/BW)))cell.classList.add('peer');}if(v&&sv&&v===sv&&p!==sel)cell.classList.add('same');if(v){cell.textContent=v;filled++;}else if(notes[p]&&notes[p].size){var ns='<div class="nt">';for(var n=1;n<=9;n++)ns+='<span>'+(notes[p].has(n)?n:'')+'</span>';ns+='</div>';cell.innerHTML=ns;}else cell.textContent='';});document.getElementById('prog').textContent=Math.round(filled/(N*N)*100)+'%';}
+function place(n){if(sel<0||given[sel]||solved)return;if(n===0){puzzle[sel]=0;if(notes[sel])notes[sel].clear();paint();return;}if(n>N)return;if(nm){if(puzzle[sel])return;if(!notes[sel])notes[sel]=new Set();notes[sel].has(n)?notes[sel].delete(n):notes[sel].add(n);paint();return;}puzzle[sel]=n;if(notes[sel])notes[sel].clear();if(n!==solution[sel]){errors++;document.getElementById('errs').textContent='Fehler: '+errors+'/3';MPO.sound.err();var cel=board.querySelector('[data-p="'+sel+'"]');paint();if(cel)cel.classList.add('err');if(errors>=3)gameOver();return;}MPO.sound.click();paint();checkWin();}
 function gameOver(){solved=true;stop();document.getElementById('wb').textContent='💥';document.getElementById('wt').textContent='Game Over';document.getElementById('wx').textContent='3 Fehler erreicht. Versuch es erneut!';document.getElementById('win').classList.add('show');}
-function checkWin(){for(var p=0;p<81;p++)if(puzzle[p]!==solution[p])return;solved=true;stop();var xp=MPO.recordWin('sudoku',{xp:XP[diff],difficulty:diff,noMistakes:errors===0,timeSec:sec,daily:daily});MPO.sound.ok();MPO.confetti();document.getElementById('wb').textContent='🎉';document.getElementById('wt').textContent='Gelöst!';document.getElementById('wx').textContent=label(diff)+' · Zeit '+fmt(sec)+' · +'+xp+' XP'+(daily?' · Daily ⭐':'');document.getElementById('win').classList.add('show');}
-function label(d){return {easy:'Leicht',medium:'Mittel',hard:'Schwer',expert:'Experte'}[d];}
+function checkWin(){for(var p=0;p<N*N;p++)if(puzzle[p]!==solution[p])return;solved=true;stop();var xp=MPO.recordWin('sudoku',{xp:XPV[diff],difficulty:diff,noMistakes:errors===0,timeSec:sec});MPO.sound.ok();MPO.confetti();document.getElementById('wb').textContent='🎉';document.getElementById('wt').textContent='Gelöst!';document.getElementById('wx').textContent=VAR[variant].label+' · '+lab(diff)+' · Zeit '+fmt(sec)+' · +'+xp+' XP';document.getElementById('win').classList.add('show');}
+function lab(d){return {easy:'Leicht',medium:'Mittel',hard:'Schwer',expert:'Experte'}[d];}
 function fmt(s){return String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
 function start(){stop();sec=0;document.getElementById('timer').textContent='00:00';tid=setInterval(function(){sec++;document.getElementById('timer').textContent=fmt(sec);},1000);}
 function stop(){if(tid)clearInterval(tid);tid=null;}
-function newGame(d,isDaily){diff=d;daily=!!isDaily;solved=false;sel=-1;errors=0;document.getElementById('errs').textContent='Fehler: 0/3';var rng=isDaily?MPO.seededRandom(MPO.getDailyDate()):null;var g=gen(HOLES[d],rng);puzzle=g.puzzle.slice();solution=g.solution;given=g.puzzle.map(function(v){return v!==0;});notes=new Array(81).fill(null);document.getElementById('mode').textContent=isDaily?('Tages-Sudoku ⭐ · '+label(d)):(label(d)+' · Ziffern 1–9 eintragen.');render();start();document.querySelectorAll('[data-diff]').forEach(function(b){b.classList.toggle('primary',b.dataset.diff===d);});}
-document.querySelectorAll('[data-diff]').forEach(function(b){b.onclick=function(){newGame(b.dataset.diff,false);};});
+function newGame(){var cfg=VAR[variant];N=cfg.N;BH=cfg.BH;BW=cfg.BW;DIAG=cfg.diag;HYPER=cfg.hyper;document.getElementById('rule').textContent=cfg.rule;
+  solved=false;sel=-1;errors=0;document.getElementById('errs').textContent='Fehler: 0/3';
+  var g=gen(HOLES[N][diff],null);puzzle=g.puzzle.slice();solution=g.solution;given=g.puzzle.map(function(v){return v!==0;});notes=new Array(N*N).fill(null);
+  buildNumpad();render();start();
+  document.querySelectorAll('[data-var]').forEach(function(b){b.classList.toggle('primary',b.dataset.var===variant);});
+  document.querySelectorAll('[data-diff]').forEach(function(b){b.classList.toggle('primary',b.dataset.diff===diff);});}
+document.querySelectorAll('[data-var]').forEach(function(b){b.onclick=function(){variant=b.dataset.var;newGame();};});
+document.querySelectorAll('[data-diff]').forEach(function(b){b.onclick=function(){diff=b.dataset.diff;newGame();};});
 document.getElementById('bn').onclick=function(){nm=!nm;this.textContent='📝 Notizen: '+(nm?'an':'aus');this.classList.toggle('primary',nm);};
 document.getElementById('be').onclick=function(){place(0);};
-document.getElementById('bnew').onclick=function(){newGame(diff,false);};
+document.getElementById('bnew').onclick=function(){newGame();};
 document.getElementById('bh').onclick=function(){if(sel<0||given[sel]){MPO.toast('💡','Hinweis','Wähle zuerst ein leeres Feld');return;}puzzle[sel]=solution[sel];given[sel]=true;if(notes[sel])notes[sel].clear();paint();checkWin();};
-document.addEventListener('keydown',function(e){if(sel<0)return;var r=Math.floor(sel/9),c=sel%9;if(e.key==='ArrowUp'&&r>0){sel-=9;paint();e.preventDefault();}else if(e.key==='ArrowDown'&&r<8){sel+=9;paint();e.preventDefault();}else if(e.key==='ArrowLeft'&&c>0){sel-=1;paint();e.preventDefault();}else if(e.key==='ArrowRight'&&c<8){sel+=1;paint();e.preventDefault();}else if(/^[1-9]$/.test(e.key))place(parseInt(e.key,10));else if(e.key==='Backspace'||e.key==='Delete'||e.key==='0')place(0);});
-function initPage(){buildNumpad();var isD=new URLSearchParams(location.search).get('daily')==='1';newGame(isD?'medium':'easy',isD);}
+document.addEventListener('keydown',function(e){if(sel<0)return;var r=Math.floor(sel/N),c=sel%N;if(e.key==='ArrowUp'&&r>0){sel-=N;paint();e.preventDefault();}else if(e.key==='ArrowDown'&&r<N-1){sel+=N;paint();e.preventDefault();}else if(e.key==='ArrowLeft'&&c>0){sel-=1;paint();e.preventDefault();}else if(e.key==='ArrowRight'&&c<N-1){sel+=1;paint();e.preventDefault();}else if(/^[1-9]$/.test(e.key))place(parseInt(e.key,10));else if(e.key==='Backspace'||e.key==='Delete'||e.key==='0')place(0);});
+function initPage(){newGame();}
 window.initPage=initPage;
 </script>
 </body>
