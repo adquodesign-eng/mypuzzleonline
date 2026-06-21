@@ -1,41 +1,15 @@
-const CACHE_NAME='mypuzzle-v1';
-const CACHE_FILES=[
-  'index.html',
-  'achievements.html',
-  'anagramme.html',
-  'daily.html',
-  'datenschutz.html',
-  'denksport.html',
-  'faq.html',
-  'gehirntraining-wiki.html',
-  'hangman.html',
-  'hilfe.html',
-  'impressum.html',
-  'kontakt.html',
-  'kreuzwort.html',
-  'logik-raster.html',
-  'mathe-raetsel.html',
-  'memory.html',
-  'muster-erkennung.html',
-  'spiele.html',
-  'spot-the-difference.html',
-  'sudoku-solver.html',
-  'sudoku-strategie.html',
-  'sudoku.html',
-  'training.html',
-  'trivia-quiz.html',
-  'ueber-uns.html',
-  'wissen-gehirnjogging.html',
-  'wissen-gewohnheiten-streaks.html',
-  'wissen-kreuzwortraetsel.html',
-  'wissen-puzzles-gehirn.html',
-  'wissen-sudoku.html',
-  'wissen.html',
-  'wort-scramble.html',
-  'wortsuche-generator.html',
-  'wortsuche.html',
-  'zahlenfolgen.html'
-];
-self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(CACHE_FILES)).catch(()=>{}));self.skipWaiting();});
-self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE_NAME).map(k=>caches.delete(k)))));self.clients.claim();});
-self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(r=>r||fetch(e.request).then(resp=>{return resp;}).catch(()=>caches.match('index.html'))));});
+self.addEventListener('install', function(){ self.skipWaiting(); });
+self.addEventListener('activate', function(e){
+  e.waitUntil((async function(){
+    try { await self.registration.unregister(); } catch(err) {}
+    try {
+      var keys = await caches.keys();
+      await Promise.all(keys.map(function(k){ return caches.delete(k); }));
+    } catch(err) {}
+    try {
+      var cs = await self.clients.matchAll();
+      cs.forEach(function(c){ c.navigate(c.url); });
+    } catch(err) {}
+  })());
+});
+self.addEventListener('fetch', function(e){ /* pass-through: let the network/Cloudflare handle it */ });

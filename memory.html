@@ -414,7 +414,7 @@ document.addEventListener('DOMContentLoaded',function(){
   document.documentElement.setAttribute('data-theme',t);
   var b=document.getElementById('themeBtn');if(b)b.textContent=t==='dark'?'☀️':'🌙';
   if(!store.g('cookie_consent',null)){var c=document.getElementById('ck');if(c)c.style.display='flex';}
-  if('serviceWorker' in navigator){try{navigator.serviceWorker.register('sw.js');}catch(e){}}
+  if('serviceWorker' in navigator){try{navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});}).catch(function(){});}}catch(e){}}
   if(typeof window.initPage==='function')window.initPage();
 });
 })();
