@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="tr" dir="ltr">
+<html lang="de" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Günlük meydan okuma – günün bulmacaları | MyPuzzleOnline</title>
-<meta name="description" content="Günlük meydan okuma: günde bir dizi görev, herkes için aynı, geri sayım ve seri ile.">
-<link rel="canonical" href="https://mypuzzleonline.com/tr/daily.html">
-<link rel="alternate" hreflang="de" href="https://mypuzzleonline.com/daily.html"><link rel="alternate" hreflang="en" href="https://mypuzzleonline.com/en/daily.html"><link rel="alternate" hreflang="fr" href="https://mypuzzleonline.com/fr/daily.html"><link rel="alternate" hreflang="es" href="https://mypuzzleonline.com/es/daily.html"><link rel="alternate" hreflang="it" href="https://mypuzzleonline.com/it/daily.html"><link rel="alternate" hreflang="pt" href="https://mypuzzleonline.com/pt/daily.html"><link rel="alternate" hreflang="nl" href="https://mypuzzleonline.com/nl/daily.html"><link rel="alternate" hreflang="pl" href="https://mypuzzleonline.com/pl/daily.html"><link rel="alternate" hreflang="tr" href="https://mypuzzleonline.com/tr/daily.html"><link rel="alternate" hreflang="ar" href="https://mypuzzleonline.com/ar/daily.html"><link rel="alternate" hreflang="zh" href="https://mypuzzleonline.com/zh/daily.html"><link rel="alternate" hreflang="x-default" href="https://mypuzzleonline.com/daily.html">
+<title>Tages-Challenge – tägliche Rätsel | MyPuzzleOnline</title>
+<meta name="description" content="Die tägliche Rätsel-Challenge: 8 Aufgaben pro Tag, für alle gleich, mit Countdown und Streak.">
+<link rel="canonical" href="https://mypuzzleonline.com/daily.html"><link rel="alternate" hreflang="de" href="https://mypuzzleonline.com/daily.html"><link rel="alternate" hreflang="en" href="https://mypuzzleonline.com/en/daily.html"><link rel="alternate" hreflang="fr" href="https://mypuzzleonline.com/fr/daily.html"><link rel="alternate" hreflang="es" href="https://mypuzzleonline.com/es/daily.html"><link rel="alternate" hreflang="it" href="https://mypuzzleonline.com/it/daily.html"><link rel="alternate" hreflang="pt" href="https://mypuzzleonline.com/pt/daily.html"><link rel="alternate" hreflang="nl" href="https://mypuzzleonline.com/nl/daily.html"><link rel="alternate" hreflang="pl" href="https://mypuzzleonline.com/pl/daily.html"><link rel="alternate" hreflang="tr" href="https://mypuzzleonline.com/tr/daily.html"><link rel="alternate" hreflang="ar" href="https://mypuzzleonline.com/ar/daily.html"><link rel="alternate" hreflang="zh" href="https://mypuzzleonline.com/zh/daily.html"><link rel="alternate" hreflang="x-default" href="https://mypuzzleonline.com/daily.html">
+
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MyPuzzleOnline">
-<meta property="og:title" content="Günlük meydan okuma – günün bulmacaları | MyPuzzleOnline">
-<meta property="og:description" content="Günlük meydan okuma: günde bir dizi görev, herkes için aynı, geri sayım ve seri ile.">
-<meta property="og:url" content="https://mypuzzleonline.com/tr/daily.html">
+<meta property="og:title" content="Tages-Challenge – tägliche Rätsel | MyPuzzleOnline">
+<meta property="og:description" content="Die tägliche Rätsel-Challenge: 8 Aufgaben pro Tag, für alle gleich, mit Countdown und Streak.">
+<meta property="og:url" content="https://mypuzzleonline.com/daily.html">
 <meta property="og:image" content="https://mypuzzleonline.com/og-image.png">
-<meta property="og:locale" content="tr_TR">
+<meta property="og:locale" content="de_DE">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Günlük meydan okuma – günün bulmacaları | MyPuzzleOnline">
-<meta name="twitter:description" content="Günlük meydan okuma: günde bir dizi görev, herkes için aynı, geri sayım ve seri ile.">
+<meta name="twitter:title" content="Tages-Challenge – tägliche Rätsel | MyPuzzleOnline">
+<meta name="twitter:description" content="Die tägliche Rätsel-Challenge: 8 Aufgaben pro Tag, für alle gleich, mit Countdown und Streak.">
 <meta name="twitter:image" content="https://mypuzzleonline.com/og-image.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
@@ -233,14 +233,14 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
 <body>
 
 <main class="narrow">
-  <div class="page-head"><h1>📅 Günlük meydan okuma</h1><p class="sub">Her gün bir dizi bulmaca – herkes için aynı. Hepsini bitirip serini koruyabilir misin?</p></div>
+  <div class="page-head"><h1>📅 Tages-Challenge</h1><p class="sub">Acht Rätsel pro Tag – für alle Spielenden gleich. Schaffst du alle und hältst deine Serie?</p></div>
   <div class="card" style="text-align:center">
-    <div style="font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Sonraki görev</div>
+    <div style="font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">Nächste Challenge in</div>
     <div id="cd" style="font-family:'Sora',sans-serif;font-size:2rem;font-weight:800;color:var(--primary)">--:--:--</div>
     <div id="todayDate" style="font-size:.8rem;color:var(--muted)"></div>
   </div>
   <div class="grid c2" id="challenges"></div>
-  <div style="text-align:center"><button class="btn amber" id="share">🔗 Sonucu paylaş</button></div>
+  <div style="text-align:center"><button class="btn amber" id="share">🔗 Ergebnis teilen</button></div>
 </main>
 
 <script>
@@ -397,7 +397,7 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome (i18n) ---------- */
-MPO.lang='de';MPO.slug='index.html';MPO.langs=["de"];
+MPO.lang='de';MPO.slug='index.html';MPO.langs=["de", "en", "fr", "es", "it", "pt", "nl", "pl", "tr", "ar", "zh"];
 var NAME={de:'Deutsch',en:'English',fr:'Français',es:'Español',it:'Italiano',pt:'Português',nl:'Nederlands',pl:'Polski',tr:'Türkçe',ar:'العربية',zh:'中文'};
 var FLAG={de:'🇩🇪',en:'🇬🇧',fr:'🇫🇷',es:'🇪🇸',it:'🇮🇹',pt:'🇵🇹',nl:'🇳🇱',pl:'🇵🇱',tr:'🇹🇷',ar:'🇸🇦',zh:'🇨🇳'};
 var LOCALINFO={en:['faq.html','hilfe.html','ueber-uns.html','impressum.html','datenschutz.html','kontakt.html']};
@@ -453,18 +453,17 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='daily';MPO.lang='tr';MPO.slug='daily.html';MPO.langs=["de", "en", "fr", "es", "it", "pt", "nl", "pl", "tr", "ar", "zh"];var DT={"today": "Bugün: ", "done": "✅ tamam", "open": "açık", "challenge": "Görev", "of": "/", "solved": "Bugün çözülen: ", "names": ["Günün Sudoku’su", "Beyin görevi", "Mantık desenleri", "Sayı Birleştirme", "Nonogram"]};
-
-var CH=[['🔢',DT.names[0],'sudoku.html?daily=1','sudoku'],['🧮',DT.names[1],'mathe-raetsel.html','math'],['🧷',DT.names[2],'muster-erkennung.html','pattern'],['🟧',DT.names[3],'zahlenfusion.html','zahlenfusion'],['🖼️',DT.names[4],'nonogramme.html','nonogram']];
+<script>MPO.activeNav='daily';MPO.lang='de';MPO.slug='daily.html';MPO.langs=["de", "en", "fr", "es", "it", "pt", "nl", "pl", "tr", "ar", "zh"];
+var CH=[['🔢','Daily Sudoku','sudoku.html?daily=1','sudoku'],['✏️','Daily Kreuzwort','kreuzwort.html','crossword'],['🟩','Wort des Tages','wort-des-tages.html?daily=1','wordday'],['🔍','Daily Wortsuche','wortsuche.html','wordsearch'],['🧮','Brain-Challenge','mathe-raetsel.html','math'],['🧷','Logik-Muster','muster-erkennung.html','pattern'],['🟧','Zahlenfusion','zahlenfusion.html','zahlenfusion'],['🖼️','Nonogramm','nonogramme.html','nonogram']];
 function doneToday(){return MPO.store.g('daily_done',{})[MPO.getDailyDate()]||{};}
 function initPage(){
-  var today=MPO.getDailyDate();document.getElementById('todayDate').textContent=DT.today+today.substr(0,4)+'-'+today.substr(4,2)+'-'+today.substr(6,2);
+  var today=MPO.getDailyDate();document.getElementById('todayDate').textContent='Heute: '+today.substr(6,2)+'.'+today.substr(4,2)+'.'+today.substr(0,4);
   var done=doneToday();
-  document.getElementById('challenges').innerHTML=CH.map(function(c,i){var ok=done[c[3]];return '<a class="tile" href="'+c[2]+'"><span class="diff badge '+(ok?'green':'gray')+'">'+(ok?DT.done:DT.open)+'</span><span class="ico">'+c[0]+'</span><h3>'+c[1]+'</h3><p>'+DT.challenge+' '+(i+1)+' '+DT.of+' '+CH.length+'</p></a>';}).join('');
+  document.getElementById('challenges').innerHTML=CH.map(function(c,i){var ok=done[c[3]];return '<a class="tile" href="'+c[2]+'"><span class="diff badge '+(ok?'green':'gray')+'">'+(ok?'✅ erledigt':'offen')+'</span><span class="ico">'+c[0]+'</span><h3>'+c[1]+'</h3><p>Challenge '+(i+1)+' von '+CH.length+'</p></a>';}).join('');
   function cd(){var n=new Date(),e=new Date(n);e.setHours(24,0,0,0);var s=Math.floor((e-n)/1000);document.getElementById('cd').textContent=String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor(s%3600/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');}
   cd();setInterval(cd,1000);
   var n=Object.keys(done).length;
-  document.getElementById('share').onclick=function(){var txt=DT.solved+n+'/'+CH.length+' 🧩 #mypuzzleonline';if(navigator.share){navigator.share({text:txt}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(txt);MPO.toast('🔗','',txt);}else{MPO.toast('🔗',txt,'');}};
+  document.getElementById('share').onclick=function(){var txt='Heute gelöst: '+n+'/'+CH.length+' 🧩 #mypuzzleonline';if(navigator.share){navigator.share({text:txt}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(txt);MPO.toast('🔗','Kopiert',txt);}else{MPO.toast('🔗',txt,'');}};
 }
 window.initPage=initPage;
 </script>
