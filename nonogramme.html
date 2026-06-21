@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Alle Spiele – Rätsel &amp; Gehirntraining | MyPuzzleOnline</title>
-<meta name="description" content="Übersicht aller 17 kostenlosen Spiele: Sudoku, Kreuzwort, Wortsuche, Memory, Hangman, Trivia, Logik-Raster und mehr.">
+<title>Nonogramme online spielen – Logik-Bilderrätsel | MyPuzzleOnline</title>
+<meta name="description" content="Nonogramme (Picross) kostenlos online: Fülle die Felder nach den Zahlenhinweisen und enthülle ein verstecktes Bild. In 5×5 und 10×10, ohne Anmeldung.">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
 <script>(function(){try{var t=localStorage.getItem('mpo_theme');t=t?JSON.parse(t):((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -213,21 +213,39 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
 </style>
 </head>
 <body>
-<main><div class="page-head"><h1>🎮 Alle Spiele</h1><p class="sub">17 kostenlose Rätsel- und Gehirntraining-Spiele – sofort spielbar, ganz ohne Anmeldung.</p></div><h2 style="font-family:'Sora',sans-serif;font-size:1.2rem;margin:18px 0 12px">🔢 Logik & Zahlen</h2><div class="grid c4"><a class="tile" href="sudoku.html"><span class="diff badge gray">Leicht–Experte</span><span class="ico">🔢</span><h3>Sudoku</h3><p>Zahlen-Logik in 4 Stufen</p></a>
-<a class="tile" href="zahlenfolgen.html"><span class="diff badge gray">Mittel</span><span class="ico">➗</span><h3>Zahlenfolgen</h3><p>Muster fortsetzen</p></a>
-<a class="tile" href="mathe-raetsel.html"><span class="diff badge gray">Leicht–Schwer</span><span class="ico">🧮</span><h3>Mathe-Rätsel</h3><p>Kopfrechnen auf Zeit</p></a>
-<a class="tile" href="muster-erkennung.html"><span class="diff badge gray">Mittel</span><span class="ico">🧷</span><h3>Muster-Erkennung</h3><p>IQ-Test-Reihen</p></a>
-<a class="tile" href="logik-raster.html"><span class="diff badge gray">Schwer</span><span class="ico">🔲</span><h3>Logik-Raster</h3><p>Einstein-Rätsel</p></a>
-<a class="tile" href="2048.html"><span class="diff badge gray">Leicht–Schwer</span><span class="ico">🟧</span><h3>2048</h3><p>Zahlen verschmelzen</p></a>
-<a class="tile" href="nonogramme.html"><span class="diff badge gray">Mittel–Schwer</span><span class="ico">🖼️</span><h3>Nonogramme</h3><p>Logik-Bilderrätsel</p></a></div><h2 style="font-family:'Sora',sans-serif;font-size:1.2rem;margin:18px 0 12px">🔤 Wörter & Sprache</h2><div class="grid c4"><a class="tile" href="kreuzwort.html"><span class="diff badge gray">Mittel</span><span class="ico">✏️</span><h3>Kreuzworträtsel</h3><p>Wörter waagerecht & senkrecht</p></a>
-<a class="tile" href="wortsuche.html"><span class="diff badge gray">Leicht</span><span class="ico">🔍</span><h3>Wortsuche</h3><p>Versteckte Wörter finden</p></a>
-<a class="tile" href="wort-scramble.html"><span class="diff badge gray">Leicht</span><span class="ico">🌀</span><h3>Word Scramble</h3><p>Buchstaben sortieren</p></a>
-<a class="tile" href="hangman.html"><span class="diff badge gray">Mittel</span><span class="ico">🪢</span><h3>Hangman</h3><p>Wort Buchstabe für Buchstabe</p></a>
-<a class="tile" href="anagramme.html"><span class="diff badge gray">Mittel</span><span class="ico">🔤</span><h3>Anagramme</h3><p>Wörter entwirren</p></a>
-<a class="tile" href="wort-des-tages.html"><span class="diff badge gray">Täglich</span><span class="ico">🟩</span><h3>Wort des Tages</h3><p>5 Buchstaben, 6 Versuche</p></a></div><h2 style="font-family:'Sora',sans-serif;font-size:1.2rem;margin:18px 0 12px">🧠 Gedächtnis & Denken</h2><div class="grid c4"><a class="tile" href="memory.html"><span class="diff badge gray">Leicht–Schwer</span><span class="ico">🃏</span><h3>Memory</h3><p>Karten-Paare aufdecken</p></a>
-<a class="tile" href="trivia-quiz.html"><span class="diff badge gray">Gemischt</span><span class="ico">❓</span><h3>Trivia-Quiz</h3><p>Allgemeinwissen</p></a>
-<a class="tile" href="denksport.html"><span class="diff badge gray">Schwer</span><span class="ico">🧠</span><h3>Denksport</h3><p>Knobelaufgaben</p></a>
-<a class="tile" href="spot-the-difference.html"><span class="diff badge gray">Mittel</span><span class="ico">🔎</span><h3>Fehlersuche</h3><p>Unterschiede finden</p></a></div></main>
+
+<style>
+.nn-tools{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:12px}
+.nn-scroll{overflow:auto;max-width:100%;padding:4px}
+table.nn{border-collapse:collapse;margin:0 auto}
+table.nn th{padding:0;background:transparent;font-family:'Inter',sans-serif;font-weight:700;color:var(--muted)}
+table.nn th.col{vertical-align:bottom;font-size:.7rem;line-height:1.05;text-align:center;padding:0 0 3px}
+table.nn th.col div{font-size:.7rem}
+table.nn th.row{text-align:right;font-size:.72rem;padding:0 6px 0 0;white-space:nowrap}
+table.nn th.corner{}
+.nn-c{width:30px;height:30px;border:1px solid var(--border);background:var(--surface);cursor:pointer;padding:0}
+.nn-c.fill{background:var(--primary);border-color:var(--primary)}
+.nn-c.mark{position:relative}
+.nn-c.mark::after{content:'×';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;font-size:.9rem}
+.nn-c.b3{border-left-width:2px;border-left-color:var(--muted)}
+.nn-c.b3t{border-top-width:2px;border-top-color:var(--muted)}
+.nn-hint{text-align:center;color:var(--muted);font-size:.82rem;margin-top:10px}
+</style>
+<main class="narrow">
+  <div class="page-head"><h1>🖼️ Nonogramme</h1><p class="sub">Logik-Bilderrätsel: Fülle die Felder nach den Zahlen an Zeilen und Spalten und ein Bild erscheint.</p></div>
+  <div class="gamewrap">
+    <div class="nn-tools">
+      <button class="btn sm primary" data-sz="5">5×5</button>
+      <button class="btn sm" data-sz="10">10×10</button>
+      <button class="btn sm" id="nnMode">✏️ Modus: Füllen</button>
+      <button class="btn sm" id="nnNew">↺ Neues Bild</button>
+      <button class="btn sm" id="nnClear">🧹 Leeren</button>
+    </div>
+    <div class="nn-scroll"><div id="nnHost"></div></div>
+    <p class="nn-hint">Tippen = Füllen · Rechtsklick (oder Modus „Markieren“) = × setzen.</p>
+  </div>
+</main>
+
 <script>
 (function(){
 'use strict';
@@ -409,6 +427,62 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='games';</script>
+<script>MPO.activeNav='games';
+var PUZZLES={
+ 5:[
+  {n:'Herz',s:['01010','11111','11111','01110','00100']},
+  {n:'Kreuz',s:['00100','00100','11111','00100','00100']},
+  {n:'Rahmen',s:['11111','10001','10001','10001','11111']},
+  {n:'Diagonale',s:['10001','01010','00100','01010','10001']},
+  {n:'Baum',s:['00100','01110','11111','00100','00100']},
+  {n:'Anker',s:['00100','01010','00100','10101','01110']}
+ ],
+ 10:[
+  {n:'Herz',s:['0000000000','0011001100','0111111110','1111111111','1111111111','0111111110','0011111100','0001111000','0000110000','0000000000']},
+  {n:'Smiley',s:['0011111100','0100000010','1001001001','1000000001','1010000101','1001111001','0100110010','0011000100','0000111000','0000000000']},
+  {n:'Stern',s:['0000110000','0000110000','0001111000','1111111111','0111111110','0011111100','0011111100','0110000110','0100000010','0000000000']}
+ ]
+};
+var sol,W,H,fill,mark,markMode=false,puz;
+function $(id){return document.getElementById(id);}
+function clues(line){var out=[],run=0;for(var i=0;i<line.length;i++){if(line[i]==='1'){run++;}else if(run){out.push(run);run=0;}}if(run)out.push(run);return out.length?out:[0];}
+function colLine(c){var s='';for(var r=0;r<H;r++)s+=sol[r][c];return s;}
+function render(){
+  var host=$('nnHost');var rowClues=[],colClues=[];
+  for(var r=0;r<H;r++)rowClues.push(clues(sol[r]));
+  for(var c=0;c<W;c++)colClues.push(clues(colLine(c)));
+  var maxCol=0;for(var c2=0;c2<W;c2++)if(colClues[c2].length>maxCol)maxCol=colClues[c2].length;
+  var html='<table class="nn"><tr><th class="corner"></th>';
+  for(var c3=0;c3<W;c3++){html+='<th class="col"><div>'+colClues[c3].join('<br>')+'</div></th>';}
+  html+='</tr>';
+  for(var r2=0;r2<H;r2++){
+    html+='<tr><th class="row">'+rowClues[r2].join(' ')+'</th>';
+    for(var c4=0;c4<W;c4++){
+      var cl='nn-c';if(c4>0&&c4%5===0)cl+=' b3';if(r2>0&&r2%5===0)cl+=' b3t';
+      if(fill[r2][c4])cl+=' fill';else if(mark[r2][c4])cl+=' mark';
+      html+='<td><button class="'+cl+'" data-r="'+r2+'" data-c="'+c4+'"></button></td>';
+    }
+    html+='</tr>';
+  }
+  html+='</table>';host.innerHTML=html;
+  host.querySelectorAll('.nn-c').forEach(function(b){
+    b.oncontextmenu=function(e){e.preventDefault();toggleMark(+b.getAttribute('data-r'),+b.getAttribute('data-c'));};
+    b.onclick=function(){var r=+b.getAttribute('data-r'),c=+b.getAttribute('data-c');if(markMode)toggleMark(r,c);else toggleFill(r,c);};
+  });
+}
+function toggleFill(r,c){if(fill[r][c]){fill[r][c]=0;}else{fill[r][c]=1;mark[r][c]=0;}MPO.sound.click();render();check();}
+function toggleMark(r,c){if(fill[r][c])return;mark[r][c]=mark[r][c]?0:1;render();}
+function check(){for(var r=0;r<H;r++)for(var c=0;c<W;c++){var want=sol[r][c]==='1'?1:0;if(fill[r][c]!==want)return;}win();}
+function win(){MPO.sound.ok();MPO.confetti();var xp=MPO.recordWin('nonogram',{xp:55});MPO.toast('\U0001F389','Gel\u00F6st: '+puz.n,'+'+xp+' XP');}
+function emptyGrid(){fill=[];mark=[];for(var r=0;r<H;r++){fill.push([]);mark.push([]);for(var c=0;c<W;c++){fill[r].push(0);mark[r].push(0);}}}
+function load(size,idx){var list=PUZZLES[size];puz=list[idx==null?Math.floor(Math.random()*list.length):idx];sol=puz.s;H=sol.length;W=sol[0].length;emptyGrid();render();document.querySelectorAll('[data-sz]').forEach(function(b){b.classList.toggle('primary',+b.getAttribute('data-sz')===size);});window._nnSize=size;}
+window.initPage=function(){
+  document.querySelectorAll('[data-sz]').forEach(function(b){b.onclick=function(){load(+b.getAttribute('data-sz'));};});
+  $('nnNew').onclick=function(){load(window._nnSize||5);};
+  $('nnClear').onclick=function(){emptyGrid();render();};
+  $('nnMode').onclick=function(){markMode=!markMode;$('nnMode').textContent=markMode?'\u274C Modus: Markieren':'\u270F\uFE0F Modus: F\u00FCllen';$('nnMode').classList.toggle('primary',markMode);};
+  load(5);
+};
+</script>
 </body>
 </html>

@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Alle Spiele – Rätsel &amp; Gehirntraining | MyPuzzleOnline</title>
-<meta name="description" content="Übersicht aller 17 kostenlosen Spiele: Sudoku, Kreuzwort, Wortsuche, Memory, Hangman, Trivia, Logik-Raster und mehr.">
+<title>Wort des Tages – tägliches Worträtsel | MyPuzzleOnline</title>
+<meta name="description" content="Wort des Tages: Errate täglich ein fünf Buchstaben langes deutsches Wort in sechs Versuchen. Farbige Hinweise führen dich zur Lösung. Kostenlos, ohne Anmeldung.">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
 <script>(function(){try{var t=localStorage.getItem('mpo_theme');t=t?JSON.parse(t):((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
@@ -213,21 +213,35 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
 </style>
 </head>
 <body>
-<main><div class="page-head"><h1>🎮 Alle Spiele</h1><p class="sub">17 kostenlose Rätsel- und Gehirntraining-Spiele – sofort spielbar, ganz ohne Anmeldung.</p></div><h2 style="font-family:'Sora',sans-serif;font-size:1.2rem;margin:18px 0 12px">🔢 Logik & Zahlen</h2><div class="grid c4"><a class="tile" href="sudoku.html"><span class="diff badge gray">Leicht–Experte</span><span class="ico">🔢</span><h3>Sudoku</h3><p>Zahlen-Logik in 4 Stufen</p></a>
-<a class="tile" href="zahlenfolgen.html"><span class="diff badge gray">Mittel</span><span class="ico">➗</span><h3>Zahlenfolgen</h3><p>Muster fortsetzen</p></a>
-<a class="tile" href="mathe-raetsel.html"><span class="diff badge gray">Leicht–Schwer</span><span class="ico">🧮</span><h3>Mathe-Rätsel</h3><p>Kopfrechnen auf Zeit</p></a>
-<a class="tile" href="muster-erkennung.html"><span class="diff badge gray">Mittel</span><span class="ico">🧷</span><h3>Muster-Erkennung</h3><p>IQ-Test-Reihen</p></a>
-<a class="tile" href="logik-raster.html"><span class="diff badge gray">Schwer</span><span class="ico">🔲</span><h3>Logik-Raster</h3><p>Einstein-Rätsel</p></a>
-<a class="tile" href="2048.html"><span class="diff badge gray">Leicht–Schwer</span><span class="ico">🟧</span><h3>2048</h3><p>Zahlen verschmelzen</p></a>
-<a class="tile" href="nonogramme.html"><span class="diff badge gray">Mittel–Schwer</span><span class="ico">🖼️</span><h3>Nonogramme</h3><p>Logik-Bilderrätsel</p></a></div><h2 style="font-family:'Sora',sans-serif;font-size:1.2rem;margin:18px 0 12px">🔤 Wörter & Sprache</h2><div class="grid c4"><a class="tile" href="kreuzwort.html"><span class="diff badge gray">Mittel</span><span class="ico">✏️</span><h3>Kreuzworträtsel</h3><p>Wörter waagerecht & senkrecht</p></a>
-<a class="tile" href="wortsuche.html"><span class="diff badge gray">Leicht</span><span class="ico">🔍</span><h3>Wortsuche</h3><p>Versteckte Wörter finden</p></a>
-<a class="tile" href="wort-scramble.html"><span class="diff badge gray">Leicht</span><span class="ico">🌀</span><h3>Word Scramble</h3><p>Buchstaben sortieren</p></a>
-<a class="tile" href="hangman.html"><span class="diff badge gray">Mittel</span><span class="ico">🪢</span><h3>Hangman</h3><p>Wort Buchstabe für Buchstabe</p></a>
-<a class="tile" href="anagramme.html"><span class="diff badge gray">Mittel</span><span class="ico">🔤</span><h3>Anagramme</h3><p>Wörter entwirren</p></a>
-<a class="tile" href="wort-des-tages.html"><span class="diff badge gray">Täglich</span><span class="ico">🟩</span><h3>Wort des Tages</h3><p>5 Buchstaben, 6 Versuche</p></a></div><h2 style="font-family:'Sora',sans-serif;font-size:1.2rem;margin:18px 0 12px">🧠 Gedächtnis & Denken</h2><div class="grid c4"><a class="tile" href="memory.html"><span class="diff badge gray">Leicht–Schwer</span><span class="ico">🃏</span><h3>Memory</h3><p>Karten-Paare aufdecken</p></a>
-<a class="tile" href="trivia-quiz.html"><span class="diff badge gray">Gemischt</span><span class="ico">❓</span><h3>Trivia-Quiz</h3><p>Allgemeinwissen</p></a>
-<a class="tile" href="denksport.html"><span class="diff badge gray">Schwer</span><span class="ico">🧠</span><h3>Denksport</h3><p>Knobelaufgaben</p></a>
-<a class="tile" href="spot-the-difference.html"><span class="diff badge gray">Mittel</span><span class="ico">🔎</span><h3>Fehlersuche</h3><p>Unterschiede finden</p></a></div></main>
+
+<style>
+.wdt-mode{display:flex;gap:8px;justify-content:center;margin-bottom:12px;flex-wrap:wrap}
+.wdt-grid{display:grid;grid-template-rows:repeat(6,1fr);gap:7px;width:min(86vw,330px);margin:0 auto}
+.wdt-row{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.wdt-cell{aspect-ratio:1;border:2px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(1.2rem,6vw,1.9rem);text-transform:uppercase;color:var(--text);background:var(--surface)}
+.wdt-cell.filled{border-color:var(--muted)}
+.wdt-cell.g{background:#16a34a;border-color:#16a34a;color:#fff}
+.wdt-cell.y{background:#eab308;border-color:#eab308;color:#fff}
+.wdt-cell.b{background:#64748b;border-color:#64748b;color:#fff}
+.wdt-kb{max-width:480px;margin:16px auto 0;display:flex;flex-direction:column;gap:6px}
+.wdt-kr{display:flex;gap:5px;justify-content:center}
+.wdt-kb button{font-family:'Inter',sans-serif;font-weight:700;border:none;border-radius:7px;background:var(--primary-soft);color:var(--text);height:46px;min-width:30px;flex:1;cursor:pointer;font-size:.9rem;padding:0 2px}
+.wdt-kb button.wide{flex:1.6;font-size:.74rem}
+.wdt-kb button.g{background:#16a34a;color:#fff}.wdt-kb button.y{background:#eab308;color:#fff}.wdt-kb button.b{background:#475569;color:#fff}
+.wdt-kb button:active{filter:brightness(.92)}
+</style>
+<main class="narrow">
+  <div class="page-head"><h1>🟩 Wort des Tages</h1><p class="sub">Errate das fünf Buchstaben lange Wort in sechs Versuchen. Grün = richtig, Gelb = falsche Stelle.</p></div>
+  <div class="gamewrap">
+    <div class="wdt-mode">
+      <button class="btn sm primary" id="wdtDaily">📅 Tagesrätsel</button>
+      <button class="btn sm" id="wdtRandom">🔀 Zufallswort</button>
+    </div>
+    <div class="wdt-grid" id="wdtGrid"></div>
+    <div class="wdt-kb" id="wdtKb"></div>
+  </div>
+</main>
+
 <script>
 (function(){
 'use strict';
@@ -409,6 +423,37 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='games';</script>
+<script>MPO.activeNav='games';
+var WORDS=['APFEL','BIRNE','BLUME','BRAUN','BRIEF','DACHS','DRANG','ENGEL','FEDER','FILME','FISCH','FLUSS','FRECH','GABEL','GEIST','GLANZ','GRUND','HAFEN','HONIG','JACKE','KAMEL','KLANG','KLEID','KRAFT','KREIS','LAMPE','LEBEN','LICHT','LINIE','MAGEN','MILCH','MUSIK','NACHT','NEBEL','ONKEL','ORGEL','PAUSE','PFERD','PLATZ','PUNKT','QUARK','RAGEN','REGEN','REISE','RIESE','ROBBE','SALAT','SCHAF','SCHUH','SEGEL','SONNE','SPIEL','STERN','STUHL','TAFEL','TANTE','TIGER','TISCH','TRAUM','VOGEL','WAGEN','WIESE','WOLKE','ZEBRA','ZIEGE','ZWERG'];
+var ROWS=['QWERTZUIOP','ASDFGHJKL','YXCVBNM'];
+var answer,row,col,grid,locked,kstate,mode;
+function $(id){return document.getElementById(id);}
+function hashStr(s){var h=0;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))&0x7FFFFFFF;}return h;}
+function buildGrid(){var g=$('wdtGrid');g.innerHTML='';grid=[];for(var r=0;r<6;r++){var rd=document.createElement('div');rd.className='wdt-row';var cells=[];for(var c=0;c<5;c++){var cl=document.createElement('div');cl.className='wdt-cell';rd.appendChild(cl);cells.push(cl);}g.appendChild(rd);grid.push(cells);}}
+function buildKb(){var kb=$('wdtKb');kb.innerHTML='';kstate={};ROWS.forEach(function(line,idx){var rd=document.createElement('div');rd.className='wdt-kr';if(idx===2){var en=document.createElement('button');en.className='wide';en.textContent='ENTER';en.onclick=submit;rd.appendChild(en);}line.split('').forEach(function(ch){var bt=document.createElement('button');bt.textContent=ch;bt.setAttribute('data-k',ch);bt.onclick=function(){typeCh(ch);};rd.appendChild(bt);});if(idx===2){var del=document.createElement('button');del.className='wide';del.textContent='\u232B';del.onclick=backspace;rd.appendChild(del);}kb.appendChild(rd);});}
+function typeCh(ch){if(locked||col>=5)return;grid[row][col].textContent=ch;grid[row][col].classList.add('filled');col++;MPO.sound.click();}
+function backspace(){if(locked||col<=0)return;col--;grid[row][col].textContent='';grid[row][col].classList.remove('filled');}
+function paintKey(ch,st){var pr={b:0,y:1,g:2};if(!kstate[ch]||pr[st]>pr[kstate[ch]]){kstate[ch]=st;var bt=document.querySelector('.wdt-kb [data-k="'+ch+'"]');if(bt){bt.classList.remove('g','y','b');bt.classList.add(st);}}}
+function submit(){if(locked||col<5)return;var guess='';for(var i=0;i<5;i++)guess+=grid[row][i].textContent;if(WORDS.indexOf(guess)<0){MPO.sound.err();MPO.toast('\u2753','Unbekannt','\u201E'+guess+'\u201C steht nicht in der Wortliste.');return;}
+  var res=['b','b','b','b','b'];var counts={};for(var k=0;k<5;k++){counts[answer[k]]=(counts[answer[k]]||0)+1;}
+  for(var i2=0;i2<5;i2++){if(guess[i2]===answer[i2]){res[i2]='g';counts[guess[i2]]--;}}
+  for(var i3=0;i3<5;i3++){if(res[i3]!=='g'&&counts[guess[i3]]>0){res[i3]='y';counts[guess[i3]]--;}}
+  for(var i4=0;i4<5;i4++){grid[row][i4].classList.add(res[i4]);paintKey(guess[i4],res[i4]);}
+  if(guess===answer){locked=true;var xp=MPO.recordWin('wordday',{xp:50,noMistakes:row===0,daily:mode==='daily'});MPO.sound.ok();MPO.confetti();MPO.toast('\U0001F389','Erraten!','+'+xp+' XP in '+(row+1)+' Versuchen');return;}
+  row++;col=0;if(row>=6){locked=true;MPO.sound.err();MPO.toast('\U0001F61F','Schade','Das Wort war: '+answer);}
+}
+function start(m){mode=m;row=0;col=0;locked=false;buildGrid();buildKb();
+  if(m==='daily'){var seed=hashStr(MPO.getDailyDate());answer=WORDS[seed%WORDS.length];}
+  else{answer=WORDS[Math.floor(Math.random()*WORDS.length)];}
+  $('wdtDaily').classList.toggle('primary',m==='daily');$('wdtRandom').classList.toggle('primary',m==='random');
+}
+window.initPage=function(){
+  $('wdtDaily').onclick=function(){start('daily');};
+  $('wdtRandom').onclick=function(){start('random');};
+  document.addEventListener('keydown',function(e){if(e.key==='Enter'){submit();}else if(e.key==='Backspace'){backspace();}else{var ch=e.key.toUpperCase();if(ch.length===1&&ch>='A'&&ch<='Z')typeCh(ch);}});
+  var daily=/[?&]daily=1/.test(location.search);
+  start(daily?'daily':'daily');
+};
+</script>
 </body>
 </html>
