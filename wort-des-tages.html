@@ -5,8 +5,25 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Wort des Tages – tägliches Worträtsel | MyPuzzleOnline</title>
 <meta name="description" content="Wort des Tages: Errate täglich ein fünf Buchstaben langes deutsches Wort in sechs Versuchen. Farbige Hinweise führen dich zur Lösung. Kostenlos, ohne Anmeldung.">
+<link rel="canonical" href="https://mypuzzleonline.com/wort-des-tages.html">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="MyPuzzleOnline">
+<meta property="og:title" content="Wort des Tages – tägliches Worträtsel | MyPuzzleOnline">
+<meta property="og:description" content="Wort des Tages: Errate täglich ein fünf Buchstaben langes deutsches Wort in sechs Versuchen. Farbige Hinweise führen dich zur Lösung. Kostenlos, ohne Anmeldung.">
+<meta property="og:url" content="https://mypuzzleonline.com/wort-des-tages.html">
+<meta property="og:image" content="https://mypuzzleonline.com/og-image.png">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Wort des Tages – tägliches Worträtsel | MyPuzzleOnline">
+<meta name="twitter:description" content="Wort des Tages: Errate täglich ein fünf Buchstaben langes deutsches Wort in sechs Versuchen. Farbige Hinweise führen dich zur Lösung. Kostenlos, ohne Anmeldung.">
+<meta name="twitter:image" content="https://mypuzzleonline.com/og-image.png">
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#6366F1">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"MyPuzzleOnline","url":"https://mypuzzleonline.com/","logo":"https://mypuzzleonline.com/icon-512.png"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"MyPuzzleOnline","url":"https://mypuzzleonline.com/","inLanguage":"de"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "name": "Wort des Tages", "description": "Wort des Tages: Errate t\u00e4glich ein f\u00fcnf Buchstaben langes deutsches Wort in sechs Versuchen. Farbige Hinweise f\u00fchren dich zur L\u00f6sung. Kostenlos, ohne Anmeldung.", "url": "https://mypuzzleonline.com/wort-des-tages.html", "genre": "Puzzle", "applicationCategory": "GameApplication", "operatingSystem": "Web", "inLanguage": "de", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "EUR"}, "publisher": {"@type": "Organization", "name": "MyPuzzleOnline"}}</script>
 <script>(function(){try{var t=localStorage.getItem('mpo_theme');t=t?JSON.parse(t):((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1921537428828630" crossorigin="anonymous"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -236,6 +253,7 @@ footer.site a{color:var(--muted);margin:0 5px}footer.site a:hover{color:var(--pr
     <div class="wdt-mode">
       <button class="btn sm primary" id="wdtDaily">📅 Tagesrätsel</button>
       <button class="btn sm" id="wdtRandom">🔀 Zufallswort</button>
+      <button class="btn sm" id="wdtShare" style="display:none">🔗 Ergebnis teilen</button>
     </div>
     <div class="wdt-grid" id="wdtGrid"></div>
     <div class="wdt-kb" id="wdtKb"></div>
@@ -426,7 +444,7 @@ document.addEventListener('DOMContentLoaded',function(){
 <script>MPO.activeNav='games';
 var WORDS=['APFEL','BIRNE','BLUME','BRAUN','BRIEF','DACHS','DRANG','ENGEL','FEDER','FILME','FISCH','FLUSS','FRECH','GABEL','GEIST','GLANZ','GRUND','HAFEN','HONIG','JACKE','KAMEL','KLANG','KLEID','KRAFT','KREIS','LAMPE','LEBEN','LICHT','LINIE','MAGEN','MILCH','MUSIK','NACHT','NEBEL','ONKEL','ORGEL','PAUSE','PFERD','PLATZ','PUNKT','QUARK','RAGEN','REGEN','REISE','RIESE','ROBBE','SALAT','SCHAF','SCHUH','SEGEL','SONNE','SPIEL','STERN','STUHL','TAFEL','TANTE','TIGER','TISCH','TRAUM','VOGEL','WAGEN','WIESE','WOLKE','ZEBRA','ZIEGE','ZWERG'];
 var ROWS=['QWERTZUIOP','ASDFGHJKL','YXCVBNM'];
-var answer,row,col,grid,locked,kstate,mode;
+var answer,row,col,grid,locked,kstate,mode,rowResults;
 function $(id){return document.getElementById(id);}
 function hashStr(s){var h=0;for(var i=0;i<s.length;i++){h=(h*31+s.charCodeAt(i))&0x7FFFFFFF;}return h;}
 function buildGrid(){var g=$('wdtGrid');g.innerHTML='';grid=[];for(var r=0;r<6;r++){var rd=document.createElement('div');rd.className='wdt-row';var cells=[];for(var c=0;c<5;c++){var cl=document.createElement('div');cl.className='wdt-cell';rd.appendChild(cl);cells.push(cl);}g.appendChild(rd);grid.push(cells);}}
@@ -439,15 +457,25 @@ function submit(){if(locked||col<5)return;var guess='';for(var i=0;i<5;i++)guess
   for(var i2=0;i2<5;i2++){if(guess[i2]===answer[i2]){res[i2]='g';counts[guess[i2]]--;}}
   for(var i3=0;i3<5;i3++){if(res[i3]!=='g'&&counts[guess[i3]]>0){res[i3]='y';counts[guess[i3]]--;}}
   for(var i4=0;i4<5;i4++){grid[row][i4].classList.add(res[i4]);paintKey(guess[i4],res[i4]);}
-  if(guess===answer){locked=true;var xp=MPO.recordWin('wordday',{xp:50,noMistakes:row===0,daily:mode==='daily'});MPO.sound.ok();MPO.confetti();MPO.toast('\U0001F389','Erraten!','+'+xp+' XP in '+(row+1)+' Versuchen');return;}
-  row++;col=0;if(row>=6){locked=true;MPO.sound.err();MPO.toast('\U0001F61F','Schade','Das Wort war: '+answer);}
+  rowResults.push(res.join(''));
+  if(guess===answer){locked=true;var xp=MPO.recordWin('wordday',{xp:50,noMistakes:row===0,daily:mode==='daily'});MPO.sound.ok();MPO.confetti();MPO.toast('\U0001F389','Erraten!','+'+xp+' XP in '+(row+1)+' Versuchen');$('wdtShare').style.display='';return;}
+  row++;col=0;if(row>=6){locked=true;MPO.sound.err();MPO.toast('\U0001F61F','Schade','Das Wort war: '+answer);$('wdtShare').style.display='';}
 }
-function start(m){mode=m;row=0;col=0;locked=false;buildGrid();buildKb();
+function start(m){mode=m;row=0;col=0;locked=false;rowResults=[];buildGrid();buildKb();$('wdtShare').style.display='none';
   if(m==='daily'){var seed=hashStr(MPO.getDailyDate());answer=WORDS[seed%WORDS.length];}
   else{answer=WORDS[Math.floor(Math.random()*WORDS.length)];}
   $('wdtDaily').classList.toggle('primary',m==='daily');$('wdtRandom').classList.toggle('primary',m==='random');
 }
+function shareResult(){
+  var head='Wort des Tages \u2013 MyPuzzleOnline\n'+MPO.getDailyDate()+'\n'+(won?rowResults.length+'/6':'X/6')+'\n';
+  var grid=rowResults.map(function(r){return r.split('').map(function(c){return c==='g'?'\ud83d\udfe9':(c==='y'?'\ud83d\udfe8':'\u2b1b');}).join('');}).join('\n');
+  var text=head+grid;
+  if(navigator.share){navigator.share({text:text}).catch(function(){});}
+  else if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(function(){MPO.toast('\U0001F4CB','Kopiert','Ergebnis ist in der Zwischenablage.');}).catch(function(){MPO.toast('\u2139\uFE0F','Ergebnis',text);});}
+  else{MPO.toast('\u2139\uFE0F','Ergebnis',text);}
+}
 window.initPage=function(){
+  $('wdtShare').onclick=shareResult;
   $('wdtDaily').onclick=function(){start('daily');};
   $('wdtRandom').onclick=function(){start('random');};
   document.addEventListener('keydown',function(e){if(e.key==='Enter'){submit();}else if(e.key==='Backspace'){backspace();}else{var ch=e.key.toUpperCase();if(ch.length===1&&ch>='A'&&ch<='Z')typeCh(ch);}});
