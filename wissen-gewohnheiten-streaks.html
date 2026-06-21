@@ -392,37 +392,48 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome (i18n) ---------- */
-MPO.lang='de';MPO.slug='index.html';MPO.bi=false;
-function T(){
-  if(MPO.lang==='en')return {games:'Games',daily:'Daily',theme:'Light/Dark',
-    ck:'We use cookies for advertising (Google AdSense). Game progress is stored locally only. ',more:'Learn more',
-    ckOk:'Accept all',ckNo:'Only necessary',
-    foot:[['spiele.html','Games'],['daily.html','Daily'],['../wissen.html','Knowledge'],['faq.html','FAQ'],['hilfe.html','Help'],['ueber-uns.html','About'],['../kontakt.html','Contact'],['impressum.html','Imprint'],['datenschutz.html','Privacy']],
-    tag:'\u00A9 2025 mypuzzleonline.com \u00B7 No account needed \u00B7 Play for free',priv:'../datenschutz.html',sw:'DE'};
-  return {games:'Spiele',daily:'Daily',theme:'Hell/Dunkel',
-    ck:'Wir nutzen Cookies f\u00FCr Werbung (Google AdSense). Spielfortschritte werden nur lokal gespeichert. ',more:'Mehr erfahren',
-    ckOk:'Alle akzeptieren',ckNo:'Nur notwendige',
-    foot:[['spiele.html','Spiele'],['daily.html','Daily'],['wissen.html','Wissen'],['faq.html','FAQ'],['hilfe.html','Hilfe'],['ueber-uns.html','\u00DCber uns'],['kontakt.html','Kontakt'],['impressum.html','Impressum'],['datenschutz.html','Datenschutz']],
-    tag:'\u00A9 2025 mypuzzleonline.com \u00B7 Kein Konto n\u00F6tig \u00B7 Kostenlos spielen',priv:'datenschutz.html',sw:'EN'};
+MPO.lang='de';MPO.slug='index.html';MPO.langs=["de"];
+var NAME={de:'Deutsch',en:'English',fr:'Français',es:'Español',it:'Italiano',pt:'Português',nl:'Nederlands',pl:'Polski',tr:'Türkçe',ar:'العربية',zh:'中文'};
+var FLAG={de:'🇩🇪',en:'🇬🇧',fr:'🇫🇷',es:'🇪🇸',it:'🇮🇹',pt:'🇵🇹',nl:'🇳🇱',pl:'🇵🇱',tr:'🇹🇷',ar:'🇸🇦',zh:'🇨🇳'};
+var LOCALINFO={en:['faq.html','hilfe.html','ueber-uns.html','impressum.html','datenschutz.html','kontakt.html']};
+var CH={
+ de:{games:'Spiele',daily:'Daily',theme:'Hell/Dunkel',ck:'Wir nutzen Cookies für Werbung (Google AdSense). Spielfortschritte werden nur lokal gespeichert. ',more:'Mehr erfahren',ckOk:'Alle akzeptieren',ckNo:'Nur notwendige',knowledge:'Wissen',help:'Hilfe',about:'Über uns',contact:'Kontakt',imprint:'Impressum',privacy:'Datenschutz',tag:'© 2025 mypuzzleonline.com · Kein Konto nötig · Kostenlos spielen'},
+ en:{games:'Games',daily:'Daily',theme:'Light/Dark',ck:'We use cookies for advertising (Google AdSense). Game progress is stored locally only. ',more:'Learn more',ckOk:'Accept all',ckNo:'Only necessary',knowledge:'Knowledge',help:'Help',about:'About',contact:'Contact',imprint:'Imprint',privacy:'Privacy',tag:'© 2025 mypuzzleonline.com · No account needed · Play for free'},
+ fr:{games:'Jeux',daily:'Quotidien',theme:'Clair/Sombre',ck:'Nous utilisons des cookies à des fins publicitaires (Google AdSense). La progression est enregistrée uniquement en local. ',more:'En savoir plus',ckOk:'Tout accepter',ckNo:'Nécessaires uniquement',knowledge:'Savoir',help:'Aide',about:'À propos',contact:'Contact',imprint:'Mentions légales',privacy:'Confidentialité',tag:'© 2025 mypuzzleonline.com · Sans compte · Jouez gratuitement'},
+ es:{games:'Juegos',daily:'Diario',theme:'Claro/Oscuro',ck:'Usamos cookies con fines publicitarios (Google AdSense). El progreso se guarda solo de forma local. ',more:'Más información',ckOk:'Aceptar todo',ckNo:'Solo necesarias',knowledge:'Conocimiento',help:'Ayuda',about:'Acerca de',contact:'Contacto',imprint:'Aviso legal',privacy:'Privacidad',tag:'© 2025 mypuzzleonline.com · Sin cuenta · Juega gratis'},
+ it:{games:'Giochi',daily:'Giornaliero',theme:'Chiaro/Scuro',ck:'Usiamo i cookie a fini pubblicitari (Google AdSense). I progressi vengono salvati solo in locale. ',more:'Scopri di più',ckOk:'Accetta tutto',ckNo:'Solo necessari',knowledge:'Sapere',help:'Aiuto',about:'Chi siamo',contact:'Contatti',imprint:'Note legali',privacy:'Privacy',tag:'© 2025 mypuzzleonline.com · Nessun account · Gioca gratis'},
+ pt:{games:'Jogos',daily:'Diário',theme:'Claro/Escuro',ck:'Usamos cookies para publicidade (Google AdSense). O progresso é guardado apenas localmente. ',more:'Saber mais',ckOk:'Aceitar tudo',ckNo:'Apenas necessários',knowledge:'Conhecimento',help:'Ajuda',about:'Sobre',contact:'Contacto',imprint:'Informação legal',privacy:'Privacidade',tag:'© 2025 mypuzzleonline.com · Sem conta · Jogue grátis'},
+ nl:{games:'Spellen',daily:'Dagelijks',theme:'Licht/Donker',ck:'We gebruiken cookies voor advertenties (Google AdSense). Voortgang wordt alleen lokaal opgeslagen. ',more:'Meer informatie',ckOk:'Alles accepteren',ckNo:'Alleen noodzakelijke',knowledge:'Kennis',help:'Help',about:'Over ons',contact:'Contact',imprint:'Colofon',privacy:'Privacy',tag:'© 2025 mypuzzleonline.com · Geen account nodig · Gratis spelen'},
+ pl:{games:'Gry',daily:'Codziennie',theme:'Jasny/Ciemny',ck:'Używamy plików cookie do reklam (Google AdSense). Postępy zapisywane są tylko lokalnie. ',more:'Dowiedz się więcej',ckOk:'Zaakceptuj wszystko',ckNo:'Tylko niezbędne',knowledge:'Wiedza',help:'Pomoc',about:'O nas',contact:'Kontakt',imprint:'Nota prawna',privacy:'Prywatność',tag:'© 2025 mypuzzleonline.com · Bez konta · Graj za darmo'},
+ tr:{games:'Oyunlar',daily:'Günlük',theme:'Açık/Koyu',ck:'Reklam için çerez kullanıyoruz (Google AdSense). İlerleme yalnızca yerel olarak saklanır. ',more:'Daha fazla bilgi',ckOk:'Tümünü kabul et',ckNo:'Yalnızca gerekli',knowledge:'Bilgi',help:'Yardım',about:'Hakkımızda',contact:'İletişim',imprint:'Künye',privacy:'Gizlilik',tag:'© 2025 mypuzzleonline.com · Hesap gerekmez · Ücretsiz oyna'},
+ ar:{games:'الألعاب',daily:'يومي',theme:'فاتح/داكن',ck:'نستخدم ملفات تعريف الارتباط للإعلانات (Google AdSense). يتم حفظ التقدم محليًا فقط. ',more:'اعرف المزيد',ckOk:'قبول الكل',ckNo:'الضرورية فقط',knowledge:'المعرفة',help:'مساعدة',about:'من نحن',contact:'اتصل بنا',imprint:'بيانات الناشر',privacy:'الخصوصية',tag:'© 2025 mypuzzleonline.com · بدون حساب · العب مجانًا'},
+ zh:{games:'游戏',daily:'每日',theme:'浅色/深色',ck:'我们使用 Cookie 投放广告（Google AdSense）。游戏进度仅保存在本地。',more:'了解更多',ckOk:'全部接受',ckNo:'仅必要',knowledge:'知识',help:'帮助',about:'关于我们',contact:'联系我们',imprint:'法律声明',privacy:'隐私',tag:'© 2025 mypuzzleonline.com · 无需账户 · 免费畅玩'}
+};
+function T(){return CH[MPO.lang]||CH.de;}
+function infoHref(p){if(MPO.lang==='de')return p;if((LOCALINFO[MPO.lang]||[]).indexOf(p)>=0)return p;return '../'+p;}
+function langSwitch(){
+  var ls=MPO.langs||[MPO.lang];if(ls.length<2)return '';
+  var cur=MPO.lang;
+  var opts=ls.map(function(L){var href=(cur==='de'?'':'../')+(L==='de'?'':L+'/')+MPO.slug;return '<option value="'+href+'"'+(L===cur?' selected':'')+'>'+(FLAG[L]||'')+' '+(NAME[L]||L)+'</option>';}).join('');
+  return '<select class="langsel" aria-label="Language" onchange="if(this.value)location.href=this.value" style="font-family:inherit;font-size:.74rem;font-weight:600;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:5px 6px;cursor:pointer;max-width:160px">'+opts+'</select>';
 }
 function header(active){
   var t=T();
   var links=[['spiele.html',t.games,'games'],['daily.html',t.daily,'daily']];
   var nav=links.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
-  var sw='';
-  if(MPO.bi){var other=(MPO.lang==='en')?('../'+MPO.slug):('en/'+MPO.slug);sw='<a class="iconbtn" id="langBtn" title="'+t.sw+'" href="'+other+'" style="text-decoration:none;font-weight:700;font-size:.76rem;display:inline-flex;align-items:center;justify-content:center">'+t.sw+'</a>';}
-  return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
-   '</nav><div class="htools">'+sw+'<button class="iconbtn" id="themeBtn" title="'+t.theme+'" onclick="MPO.toggleTheme()">🌙</button></div></header>';
+  return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+'</nav><div class="htools">'+langSwitch()+'<button class="iconbtn" id="themeBtn" title="'+t.theme+'" onclick="MPO.toggleTheme()">🌙</button></div></header>';
 }
 function footer(){
   var t=T();
-  var fl=t.foot.map(function(l){return '<a href="'+l[0]+'">'+l[1]+'</a>';}).join(' · ');
+  var items=[['spiele.html',t.games],['daily.html',t.daily],[infoHref('wissen.html'),t.knowledge],[infoHref('faq.html'),'FAQ'],[infoHref('hilfe.html'),t.help],[infoHref('ueber-uns.html'),t.about],[infoHref('kontakt.html'),t.contact],[infoHref('impressum.html'),t.imprint],[infoHref('datenschutz.html'),t.privacy]];
+  var fl=items.map(function(l){return '<a href="'+l[0]+'">'+l[1]+'</a>';}).join(' · ');
   return '<div id="toast-wrap"></div>'+
-   '<div id="ck"><p>'+t.ck+'<a href="'+t.priv+'">'+t.more+'</a></p>'+
+   '<div id="ck"><p>'+t.ck+'<a href="'+infoHref('datenschutz.html')+'">'+t.more+'</a></p>'+
    '<div class="ck-btns"><button id="ck-ok" onclick="MPO._ck(\'all\')">'+t.ckOk+'</button><button id="ck-no" onclick="MPO._ck(\'necessary\')">'+t.ckNo+'</button></div></div>'+
    '<footer class="site"><div>'+fl+'</div>'+
    '<div style="margin-top:3px">'+t.tag+'</div></footer>';
 }
+
 MPO._ck=function(v){store.s('cookie_consent',v);var c=document.getElementById('ck');if(c)c.style.display='none';};
 MPO.activeNav='';
 document.addEventListener('DOMContentLoaded',function(){
@@ -437,6 +448,6 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='';MPO.lang='de';MPO.slug='wissen-gewohnheiten-streaks.html';MPO.bi=false;</script>
+<script>MPO.activeNav='';MPO.lang='de';MPO.slug='wissen-gewohnheiten-streaks.html';MPO.langs=["de"];</script>
 </body>
 </html>

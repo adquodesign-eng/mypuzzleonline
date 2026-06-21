@@ -1,5 +1,5 @@
 name = "mypuzzleonline"
-compatibility_date = "2026-06-21"
+compatibility_date = "2024-01-01"
 
 [assets]
 directory = "./"
