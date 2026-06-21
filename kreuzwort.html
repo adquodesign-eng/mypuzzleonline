@@ -405,12 +405,12 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome (i18n) ---------- */
-MPO.lang='de';MPO.slug='index.html';
+MPO.lang='de';MPO.slug='index.html';MPO.bi=false;
 function T(){
   if(MPO.lang==='en')return {games:'Games',daily:'Daily',theme:'Light/Dark',
     ck:'We use cookies for advertising (Google AdSense). Game progress is stored locally only. ',more:'Learn more',
     ckOk:'Accept all',ckNo:'Only necessary',
-    foot:[['spiele.html','Games'],['daily.html','Daily'],['../wissen.html','Knowledge'],['../faq.html','FAQ'],['../hilfe.html','Help'],['../ueber-uns.html','About'],['../kontakt.html','Contact'],['../impressum.html','Imprint'],['../datenschutz.html','Privacy']],
+    foot:[['spiele.html','Games'],['daily.html','Daily'],['../wissen.html','Knowledge'],['faq.html','FAQ'],['hilfe.html','Help'],['ueber-uns.html','About'],['../kontakt.html','Contact'],['impressum.html','Imprint'],['datenschutz.html','Privacy']],
     tag:'\u00A9 2025 mypuzzleonline.com \u00B7 No account needed \u00B7 Play for free',priv:'../datenschutz.html',sw:'DE'};
   return {games:'Spiele',daily:'Daily',theme:'Hell/Dunkel',
     ck:'Wir nutzen Cookies f\u00FCr Werbung (Google AdSense). Spielfortschritte werden nur lokal gespeichert. ',more:'Mehr erfahren',
@@ -422,8 +422,8 @@ function header(active){
   var t=T();
   var links=[['spiele.html',t.games,'games'],['daily.html',t.daily,'daily']];
   var nav=links.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
-  var other=(MPO.lang==='en')?('../'+MPO.slug):('en/'+MPO.slug);
-  var sw='<a class="iconbtn" id="langBtn" title="'+t.sw+'" href="'+other+'" style="text-decoration:none;font-weight:700;font-size:.76rem;display:inline-flex;align-items:center;justify-content:center">'+t.sw+'</a>';
+  var sw='';
+  if(MPO.bi){var other=(MPO.lang==='en')?('../'+MPO.slug):('en/'+MPO.slug);sw='<a class="iconbtn" id="langBtn" title="'+t.sw+'" href="'+other+'" style="text-decoration:none;font-weight:700;font-size:.76rem;display:inline-flex;align-items:center;justify-content:center">'+t.sw+'</a>';}
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
    '</nav><div class="htools">'+sw+'<button class="iconbtn" id="themeBtn" title="'+t.theme+'" onclick="MPO.toggleTheme()">🌙</button></div></header>';
 }
@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='games';MPO.lang='de';MPO.slug='kreuzwort.html';var PUZZLES=[{diff:"leicht",grid:[["#","#","R","#","#","#","#","#","#","#"],["#","#","O","#","H","#","#","#","K","#"],["#","#","S","#","O","#","#","R","A","D"],["S","T","E","R","N","#","#","#","T","#"],["#","#","#","#","I","#","#","#","Z","#"],["#","#","#","#","G","A","R","T","E","N"]],clues:{A:{"4":"Dreht sich am Fahrzeug","5":"Leuchtpunkt am Nachthimmel","6":"Grün hinterm Haus"},D:{"1":"Blume mit Dornen","2":"Süß von Bienen","3":"Schnurrt gern"}}},
+<script>MPO.activeNav='games';MPO.lang='de';MPO.slug='kreuzwort.html';MPO.bi=false;var PUZZLES=[{diff:"leicht",grid:[["#","#","R","#","#","#","#","#","#","#"],["#","#","O","#","H","#","#","#","K","#"],["#","#","S","#","O","#","#","R","A","D"],["S","T","E","R","N","#","#","#","T","#"],["#","#","#","#","I","#","#","#","Z","#"],["#","#","#","#","G","A","R","T","E","N"]],clues:{A:{"4":"Dreht sich am Fahrzeug","5":"Leuchtpunkt am Nachthimmel","6":"Grün hinterm Haus"},D:{"1":"Blume mit Dornen","2":"Süß von Bienen","3":"Schnurrt gern"}}},
 {diff:"leicht",grid:[["#","#","K","#","#","#","#","#","#","#","#"],["#","T","U","R","M","#","#","#","#","#","#"],["#","#","C","#","#","#","#","#","#","#","#"],["#","#","H","#","S","#","#","#","#","#","I"],["#","#","E","#","E","#","#","#","#","#","N"],["H","O","N","I","G","#","#","#","#","#","S"],["#","#","#","#","E","#","#","#","#","#","E"],["#","#","#","#","L","O","E","F","F","E","L"]],clues:{A:{"2":"Hohes schmales Bauwerk","5":"Süß von Bienen","6":"Besteck für Suppe"},D:{"1":"Süßes Gebäck","3":"Fängt am Boot den Wind","4":"Land im Meer"}}},
 {diff:"mittel",grid:[["#","#","R","#","#","#","#","#","#","#"],["#","#","O","#","H","#","#","#","K","#"],["E","#","S","#","O","#","#","R","A","D"],["S","T","E","R","N","#","#","#","T","#"],["E","#","#","#","I","#","B","#","Z","#"],["L","#","#","#","G","A","R","T","E","N"],["#","#","#","#","#","#","O","#","#","O"],["#","#","#","#","#","#","T","#","#","T"],["#","#","#","#","#","#","#","#","#","E"]],clues:{A:{"5":"Dreht sich am Fahrzeug","6":"Leuchtpunkt am Nachthimmel","8":"Grün hinterm Haus"},D:{"1":"Blume mit Dornen","2":"Süß von Bienen","3":"Schnurrt gern","4":"Graues Lasttier mit langen Ohren","7":"Bäcker backt es","9":"Zeichen in der Musik"}}},
 {diff:"mittel",grid:[["#","#","#","#","#","H","#","#","#","#","#"],["#","#","#","#","#","A","#","#","#","#","#"],["#","#","#","M","A","U","S","#","#","#","#"],["#","T","#","A","#","S","#","#","#","#","#"],["#","O","#","L","#","#","#","#","#","#","#"],["B","R","U","E","C","K","E","#","#","#","#"],["#","#","#","N","#","#","S","#","#","#","#"],["#","#","#","#","#","#","E","#","#","#","#"],["#","#","#","#","#","#","L","E","S","E","N"],["#","#","#","#","#","#","#","#","E","#","#"],["#","#","#","#","#","#","Z","U","G","#","#"],["#","#","#","#","#","#","#","#","E","#","#"],["#","#","#","#","#","#","#","#","L","#","#"]],clues:{A:{"2":"Kleiner Nager","4":"Führt über einen Fluss","6":"Ein Buch …","8":"Fährt auf Schienen"},D:{"1":"Man wohnt darin","2":"Mit Pinsel und Farbe","3":"Großes Eingangstor","5":"Graues Lasttier mit langen Ohren","7":"Fängt am Boot den Wind"}}},

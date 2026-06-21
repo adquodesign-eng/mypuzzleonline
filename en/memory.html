@@ -406,12 +406,12 @@ MPO.recordWin=function(game,opts){
 };
 
 /* ---------- chrome (i18n) ---------- */
-MPO.lang='de';MPO.slug='index.html';
+MPO.lang='de';MPO.slug='index.html';MPO.bi=false;
 function T(){
   if(MPO.lang==='en')return {games:'Games',daily:'Daily',theme:'Light/Dark',
     ck:'We use cookies for advertising (Google AdSense). Game progress is stored locally only. ',more:'Learn more',
     ckOk:'Accept all',ckNo:'Only necessary',
-    foot:[['spiele.html','Games'],['daily.html','Daily'],['../wissen.html','Knowledge'],['../faq.html','FAQ'],['../hilfe.html','Help'],['../ueber-uns.html','About'],['../kontakt.html','Contact'],['../impressum.html','Imprint'],['../datenschutz.html','Privacy']],
+    foot:[['spiele.html','Games'],['daily.html','Daily'],['../wissen.html','Knowledge'],['faq.html','FAQ'],['hilfe.html','Help'],['ueber-uns.html','About'],['../kontakt.html','Contact'],['impressum.html','Imprint'],['datenschutz.html','Privacy']],
     tag:'\u00A9 2025 mypuzzleonline.com \u00B7 No account needed \u00B7 Play for free',priv:'../datenschutz.html',sw:'DE'};
   return {games:'Spiele',daily:'Daily',theme:'Hell/Dunkel',
     ck:'Wir nutzen Cookies f\u00FCr Werbung (Google AdSense). Spielfortschritte werden nur lokal gespeichert. ',more:'Mehr erfahren',
@@ -423,8 +423,8 @@ function header(active){
   var t=T();
   var links=[['spiele.html',t.games,'games'],['daily.html',t.daily,'daily']];
   var nav=links.map(function(l){return '<a href="'+l[0]+'"'+(active===l[2]?' class="active"':'')+'>'+l[1]+'</a>';}).join('');
-  var other=(MPO.lang==='en')?('../'+MPO.slug):('en/'+MPO.slug);
-  var sw='<a class="iconbtn" id="langBtn" title="'+t.sw+'" href="'+other+'" style="text-decoration:none;font-weight:700;font-size:.76rem;display:inline-flex;align-items:center;justify-content:center">'+t.sw+'</a>';
+  var sw='';
+  if(MPO.bi){var other=(MPO.lang==='en')?('../'+MPO.slug):('en/'+MPO.slug);sw='<a class="iconbtn" id="langBtn" title="'+t.sw+'" href="'+other+'" style="text-decoration:none;font-weight:700;font-size:.76rem;display:inline-flex;align-items:center;justify-content:center">'+t.sw+'</a>';}
   return '<header class="site"><a href="index.html" class="logo">🧩 my<b>puzzle</b>online</a><nav>'+nav+
    '</nav><div class="htools">'+sw+'<button class="iconbtn" id="themeBtn" title="'+t.theme+'" onclick="MPO.toggleTheme()">🌙</button></div></header>';
 }
@@ -451,7 +451,7 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 })();
 </script>
-<script>MPO.activeNav='games';MPO.lang='en';MPO.slug='memory.html';
+<script>MPO.activeNav='games';MPO.lang='en';MPO.slug='memory.html';MPO.bi=true;
 var THEMES={emoji:['🍎','🌟','🎵','🐱','🌸','⚽','🚀','🍀','🎲','🦊','🌈','🍩','🎈','🐢','🍕','🎸','🦋','🐬','🌻','🍔','🎯','🐧','🍓','🦁','🌙','🎁','🐙','🍇','🎺','🦄','🍒','🐳'],symbole:['◆','●','▲','★','■','♥','♠','♣','♦','◯','◼','✚','✦','❖','➤','✪','✤','❄','✿','☀','☂','☘','♫','✈','⚓','⚑','⌘','⚙','✺','✹','✸','✶'],zahlen:['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','21','22','23','24','25','26','27','28','29','30','31','32']};
 var XP={4:30,6:60,8:100};
 var grid=document.getElementById('grid'),deck,flip=[],moves,pairs,need,lock=false,sec=0,tid=null,size=4,theme='emoji';
